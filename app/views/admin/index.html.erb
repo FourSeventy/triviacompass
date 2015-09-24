@@ -1,0 +1,55 @@
+<h1>Admin Panel</h1>
+
+
+<h2>Bar Listing</h2>
+
+<a href="/admin/newBar"> New Bar</a>
+
+<table>
+
+  <tr>
+    <th>id</th>
+    <th>Name</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th>Trivia Time</th>
+    <th>Trivia Day</th>
+  </tr>
+
+  <% @all_bars.each do |bar| %>
+
+      <tr>
+
+        <td>
+          <%= bar.id %>
+        </td>
+        <td>
+          <%= bar.name %>
+        </td>
+        <td>
+          <%= bar.address %>
+        </td>
+        <td>
+          <%= bar.city %>
+        </td>
+        <td>
+          <%= bar.state %>
+        </td>
+        <td>
+          <%= bar.zip %>
+        </td>
+        <td>
+          <%= bar.trivia_time %>
+        </td>
+        <td>
+          <%= bar.trivia_day %>
+        </td>
+      </tr>
+
+
+
+  <%end%>
+
+</table>

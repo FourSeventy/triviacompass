@@ -1,0 +1,25 @@
+<h1>Bar Trivia Listing</h1>
+
+<table>
+
+  <tr>
+    <th>Name</th>
+    <th>Trivia Day</th>
+  </tr>
+
+    <% @all_bars.each do |bar| %>
+
+    <tr>
+      <td>
+        <%= bar.name %>
+      </td>
+      <td>
+        <%= bar.trivia_day %>
+      </td>
+    </tr>
+
+
+
+    <%end%>
+
+</table>
