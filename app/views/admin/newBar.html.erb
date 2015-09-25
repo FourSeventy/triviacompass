@@ -1,28 +1,56 @@
-<h1> New Bar</h1>
+<div class="container">
 
-<%= form_tag '/admin/newBar/', method: 'post'  do %>
+    <div class="row">
+        <h1> New Bar</h1>
+    </div>
 
-    <%= label_tag :name, 'Name' %>
-    <%= text_field_tag :name %>
+    <%= form_tag '/admin/newBar/', method: 'post'  do %>
 
-    <%= label_tag :address, 'Address' %>
-    <%= text_field_tag :address %>
+      <div class="row">
+            <div class="col-md-6 form-group">
+                <%= label_tag :name, 'Name' %>
+                <%= text_field_tag :name, nil, class: 'form-control' %>
+            </div>
 
-    <%= label_tag :city, 'City' %>
-    <%= text_field_tag :city %>
-
-    <%= label_tag :state, 'State' %>
-    <%= text_field_tag :state %>
-
-    <%= label_tag :zip, 'Zip' %>
-    <%= text_field_tag :zip %>
-
-    <%= label_tag :time, 'Trivia Time' %>
-    <%= time_field_tag :time  %>
-
-    <%= label_tag :day, 'Trivia Day' %>
-    <%= text_field_tag :day %>
+            <div class="col-md-6 form-group">
+                <%= label_tag :address, 'Address' %>
+                <%= text_field_tag :address, nil, class: 'form-control' %>
+            </div>
+        </div>
 
 
-    <%= submit_tag 'Create' %>
-<%end%>
+      <div class="row">
+            <div class="col-md-4 form-group">
+                <%= label_tag :city, 'City' %>
+                <%= text_field_tag :city, nil, class: 'form-control' %>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <%= label_tag :state, 'State' %>
+                <%= text_field_tag :state, nil, class: 'form-control' %>
+            </div>
+
+
+            <div class="col-md-4 form-group">
+                <%= label_tag :zip, 'Zip' %>
+                <%= text_field_tag :zip, nil, class: 'form-control' %>
+            </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 form-group">
+            <%= label_tag :time, 'Trivia Time' %>
+            <%= time_field_tag :time, nil, class: 'form-control'  %>
+        </div>
+
+        <div class="col-md-6 form-group">
+            <%= label_tag :day, 'Trivia Day' %>
+            <%= text_field_tag :day, nil, class: 'form-control' %>
+        </div>
+      </div>
+
+        <%= submit_tag 'Create', class:'btn btn-primary' %>
+    <%end%>
+
+
+</div>

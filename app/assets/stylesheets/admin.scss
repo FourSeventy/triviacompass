@@ -1,3 +1,21 @@
-// Place all the styles related to the Admin controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.admin{
+
+  h1{
+    margin-bottom: 40px;
+  }
+
+  table{
+    margin-top: 15px;
+
+    tr{
+      &:hover{
+        cursor:pointer;
+      }
+    }
+  }
+
+
+  .btn{
+    margin-top: 20px;
+  }
+}

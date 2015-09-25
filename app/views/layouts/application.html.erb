@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TriviaSite</title>
+  <title>Boston Trivia</title>
+
+  <!-- meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=9,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <meta name="author" content="Michael Signorella">
+  <meta name="description" content="Timeline ">
+  <meta name="keywords" content="Timeline, Michael Signorella">
+
+  <!-- Social: Facebook /Open Graph -->
+  <meta property="og:url" content="https://www.silvergobletgames.com">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Timeline">
+  <meta property="og:image" content="https://www.silvergobletgames.com/assets/img/silver-goblet-big.png"/>
+  <meta property="og:description" content="Timeline">
+  <meta property="og:site_name" content="Timeline">
+
+  <!-- /meta -->
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/assets/img/favicon.png">
+
+  <!-- head js -->
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
 
-<%= yield %>
+<div class="push-wrap">
+
+  <!-- header -->
+  <%= render 'layouts/header' %>
+
+  <!-- body -->
+  <%= yield %>
+
+  <div class="push"></div>
+</div>
+
+<!-- footer -->
+<%= render 'layouts/footer' %>
 
 </body>
 </html>
