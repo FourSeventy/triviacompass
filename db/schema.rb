@@ -22,7 +22,8 @@ ActiveRecord::Schema.define(version: 20150924211853) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.time     "trivia_time"
+    t.string   "phone"
+    t.string   "trivia_time"
     t.string   "trivia_day"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

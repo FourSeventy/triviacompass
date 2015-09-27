@@ -6,7 +6,8 @@ class CreateBars < ActiveRecord::Migration
       t.string :city
       t.string :state
       t.string :zip
-      t.time :trivia_time
+      t.string :phone
+      t.string :trivia_time
       t.string :trivia_day
 
       t.timestamps null: false
