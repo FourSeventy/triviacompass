@@ -30,6 +30,35 @@ class BarsController < ApplicationController
     end
 
 
+    #sort each day by time
+    @monday_bars.sort! do |a, b|
+      a.trivia_time <=> b.trivia_time
+    end
+
+    @tuesday_bars.sort! do |a, b|
+      a.trivia_time <=> b.trivia_time
+    end
+
+    @wednesday_bars.sort! do |a, b|
+      a.trivia_time <=> b.trivia_time
+    end
+
+    @thursday_bars.sort! do |a, b|
+      a.trivia_time <=> b.trivia_time
+    end
+
+    @friday_bars.sort! do |a, b|
+      a.trivia_time <=> b.trivia_time
+    end
+
+    @saturday_bars.sort! do |a, b|
+      a.trivia_time <=> b.trivia_time
+    end
+
+    @sunday_bars.sort! do |a, b|
+      a.trivia_time <=> b.trivia_time
+    end
+
 
   end
 end
