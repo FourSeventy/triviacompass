@@ -17,20 +17,40 @@ class AdminController < ApplicationController
   def createBar
 
     #gather params
-    name = params[:name]
-    address = params[:address]
-    city = params[:city]
-    state = params[:state]
-    zip = params[:zip]
-    phone = params[:phone]
-    trivia_time = params[:time]
+    name = params[:name].strip
+    address = params[:address].strip
+    city = params[:city].strip
+    state = params[:state].strip
+    zip = params[:zip].strip
+    phone = params[:phone].tr('()-', '') #remove ( ) and -
+    trivia_time = params[:time].strip
     trivia_day = params[:day]
 
     #create model and DB entry
-    Bar.create(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
+    bar = Bar.create(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
 
-    #redirect to index
-    redirect_to action: 'index'
+
+    #redirect to index if bar is valid
+    if bar.valid? then
+       redirect_to action: 'index'
+    else
+
+      #write form inputs to flash
+      flash[:name] = name
+      flash[:address] = address
+      flash[:city] = city
+      flash[:state] = state
+      flash[:zip] = zip
+      flash[:phone] = phone
+      flash[:trivia_time] = trivia_time
+      flash[:trivia_day] = trivia_day
+
+      #write errors to flash
+      flash[:errors] = bar.errors
+
+       redirect_to action: 'newBar'
+    end
+
 
   end
 
@@ -50,21 +70,30 @@ class AdminController < ApplicationController
 
     #gather params
     id = params[:id]
-    name = params[:name]
-    address = params[:address]
-    city = params[:city]
-    state = params[:state]
-    zip = params[:zip]
-    phone = params[:phone]
-    trivia_time = params[:time]
+    name = params[:name].strip
+    address = params[:address].strip
+    city = params[:city].strip
+    state = params[:state].strip
+    zip = params[:zip].strip
+    phone = params[:phone].tr('()-', '') #remove ( ) and -
+    trivia_time = params[:time].strip
     trivia_day = params[:day]
 
     #find record and update
     bar = Bar.find_by_id(id)
     bar.update(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
 
-    #redirect to index
-    redirect_to action: 'index'
+    #redirect to index if bar is valid
+    if bar.valid? then
+      redirect_to action: 'index'
+    else
+
+      #write errors to flash
+      flash[:errors] = bar.errors
+
+      redirect_to action: 'editBar', id: id
+    end
+
 
   end
 

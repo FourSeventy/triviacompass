@@ -4,22 +4,28 @@
         <h1> New Bar</h1>
     </div>
 
+      <% unless flash[:errors].nil? %>
+          <% flash[:errors].each do |error| %>
+              <div class ="alert alert-danger"> <%= "#{error[0]}: #{error[1][0]}" %></div>
+          <%end %>
+      <%end%>
+
     <%= form_tag '/admin/newBar/', method: 'post'  do %>
 
       <div class="row">
             <div class="col-md-4 form-group">
                 <%= label_tag :name, 'Name' %>
-                <%= text_field_tag :name, nil, class: 'form-control' %>
+                <%= text_field_tag :name, flash[:name], class: 'form-control' %>
             </div>
 
             <div class="col-md-4 form-group">
                 <%= label_tag :address, 'Address' %>
-                <%= text_field_tag :address, nil, class: 'form-control' %>
+                <%= text_field_tag :address, flash[:address], class: 'form-control' %>
             </div>
 
             <div class="col-md-4 form-group">
               <%= label_tag :city, 'City' %>
-              <%= text_field_tag :city, nil, class: 'form-control' %>
+              <%= text_field_tag :city, flash[:city], class: 'form-control' %>
             </div>
         </div>
 
@@ -28,17 +34,17 @@
 
             <div class="col-md-4 form-group">
                 <%= label_tag :state, 'State' %>
-                <%= text_field_tag :state, nil, class: 'form-control' %>
+                <%= text_field_tag :state, flash[:state], class: 'form-control' %>
             </div>
 
             <div class="col-md-4 form-group">
                 <%= label_tag :zip, 'Zip' %>
-                <%= text_field_tag :zip, nil, class: 'form-control' %>
+                <%= text_field_tag :zip, flash[:zip], class: 'form-control' %>
             </div>
 
             <div class="col-md-4 form-group">
               <%= label_tag :phone, 'Phone' %>
-              <%= text_field_tag :phone, nil, class: 'form-control' %>
+              <%= text_field_tag :phone, flash[:phone], class: 'form-control' %>
             </div>
 
 
@@ -47,12 +53,12 @@
       <div class="row">
         <div class="col-md-6 form-group">
             <%= label_tag :time, 'Trivia Time' %>
-            <%= text_field_tag :time, nil, class: 'form-control'  %>
+            <%= text_field_tag :time, flash[:trivia_time], class: 'form-control'  %>
         </div>
 
         <div class="col-md-6 form-group">
             <%= label_tag :day, 'Trivia Day' %>
-          <%= select_tag :day, options_for_select([['Sunday','Sunday'],['Monday','Monday'],['Tuesday','Tuesday'],['Wednesday','Wednesday'],['Thursday','Thursday'],['Friday','Friday']]), class: 'form-control' %>
+          <%= select_tag :day, options_for_select([['Sunday','Sunday'],['Monday','Monday'],['Tuesday','Tuesday'],['Wednesday','Wednesday'],['Thursday','Thursday'],['Friday','Friday']], flash[:trivia_day]), class: 'form-control' %>
 
         </div>
       </div>

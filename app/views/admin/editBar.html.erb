@@ -4,6 +4,12 @@
     <h1> Edit Bar</h1>
   </div>
 
+  <% unless flash[:errors].nil? %>
+      <% flash[:errors].each do |error| %>
+          <div class ="alert alert-danger"> <%= "#{error[0]}: #{error[1][0]}" %></div>
+      <%end %>
+  <%end%>
+
   <%= form_tag '/admin/editBar', method: 'post'  do %>
 
       <%= hidden_field_tag :id, @bar.id %>
