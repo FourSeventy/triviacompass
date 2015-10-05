@@ -29,8 +29,11 @@
   <!-- head js -->
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <!-- application javascript -->
+  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag    'application', media: 'all'%>
+
   <%= csrf_meta_tags %>
 
 </head>
@@ -49,6 +52,13 @@
 
 <!-- footer -->
 <%= render 'layouts/footer' %>
+
+
+
+<!-- google maps -->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZYjM6x04RwLCPU8wiqUpDPebCHyXEmDQ&callback=initMap">
+</script>
 
 </body>
 </html>
