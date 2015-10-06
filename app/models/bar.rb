@@ -1,3 +1,6 @@
+require "http"
+
+
 class Bar < ActiveRecord::Base
 
 
@@ -11,6 +14,28 @@ class Bar < ActiveRecord::Base
   validates_format_of :phone, with: /\d{10}/, message: "must be ten digits"
   validates :trivia_day, presence: true
   validates :trivia_time, presence: true
+  validates :lat, presence: true
+  validates :long, presence: true
+
+
+
+
+  def populateLocation
+
+    endpoint ='https://maps.googleapis.com/maps/api/geocode/json'
+    key = Rails.configuration.google_maps_api_key
+    address_param= CGI.escape("#{self.address} #{self.city} #{self.state} #{self.zip}")
+
+    raw_response = HTTP.get("#{endpoint}?key=#{key}&address=#{address_param}")
+
+    #TODO: check for errors
+    response = JSON.parse raw_response.to_s
+    location = response['results'][0]['geometry']['location']
+
+    self.lat = location['lat']
+    self.long = location['lng']
+
+  end
 
 
 end

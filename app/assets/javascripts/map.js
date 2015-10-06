@@ -1,48 +1,53 @@
 function initMap() {
-    var myLatLng = {lat: 42.360082, lng: -71.0589};
+    var bostonLatLng = {lat: 42.360082, lng: -71.0589};
 
     // Create a map object and specify the DOM element for display.
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: myLatLng,
-        scrollwheel: false,
+        center: bostonLatLng,
+        //scrollwheel: false,
         zoom: 13,
         mapTypeControl: false,
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    //make geocoder
-    var geocoder = new google.maps.Geocoder();
-
     //get list of bars
     barList = [];
     barList = $('#bar-data').data('bars');
+    infoWindowList = [];
 
 
     //create marker for each bar
-    //$.each(barList, function(index, bar){
-    //
-    //    var address = bar.address + ', ' + bar.city + ', ' + bar.zip;
-    //    geocodeAddress(address, geocoder, map);
-    //});
+    $.each(barList, function(index, bar){
 
+        //create marker
+        var marker = new google.maps.Marker({
+            position: {lat: parseFloat(bar.lat), lng: parseFloat(bar.long)},
+            map: map,
+            animation: google.maps.Animation.DROP,
+            title: bar.name
+        });
 
-};
+        //create info window
+        var infowindow = new google.maps.InfoWindow({
+            content: '<div class="marker-window"> <p>'+bar.name+'</p> <p>'+bar.address+'</p> <p>'+bar.city + ", " + bar.state + " " + bar.zip+'</p></div>'
+        });
 
-function geocodeAddress(address, geocoder, resultsMap) {
+        infoWindowList.push(infowindow);
 
-    geocoder.geocode({'address': address}, function (results, status) {
-        if (status === google.maps.GeocoderStatus.OK)
-        {
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-                map: resultsMap,
-                position: results[0].geometry.location
+        //bind click listener to open window
+        marker.addListener('click', function() {
+
+            //close other windows
+            $.each(infoWindowList, function(index, window){
+                window.close();
             });
-        }
-        else
-        {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
+
+            //open this one
+            infowindow.open(map, marker);
+        });
+
     });
+
+
 }

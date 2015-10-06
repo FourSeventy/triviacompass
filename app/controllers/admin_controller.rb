@@ -4,6 +4,7 @@ class AdminController < ApplicationController
   def index
     #pull all bars from DB for listing
     @all_bars = Bar.all().order(:id)
+
   end
 
 
@@ -26,9 +27,14 @@ class AdminController < ApplicationController
     trivia_time = params[:time].strip
     trivia_day = params[:day]
 
-    #create model and DB entry
-    bar = Bar.create(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
+    #create model
+    bar = Bar.new(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
 
+    #populate location
+    bar.populateLocation
+
+    #save to db
+    bar.save
 
     #redirect to index if bar is valid
     if bar.valid? then
