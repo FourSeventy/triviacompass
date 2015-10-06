@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20150924211853) do
     t.string   "phone"
     t.string   "trivia_time"
     t.string   "trivia_day"
+    t.string   "lat"
+    t.string   "long"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

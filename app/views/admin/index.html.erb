@@ -27,7 +27,10 @@
         <th>Number</th>
         <th>Trivia Time</th>
         <th>Trivia Day</th>
+        <th>Lat</th>
+        <th>Long</th>
         <th>Edit</th>
+
       </tr>
 
       <% @all_bars.each do |bar| %>
@@ -60,6 +63,12 @@
               </td>
               <td>
                 <%= bar.trivia_day %>
+              </td>
+              <td>
+                <%= bar.lat %>
+              </td>
+              <td>
+                <%= bar.long %>
               </td>
               <td>
                 <a href = <%= "/admin/editBar/#{bar.id}"%>> Edit </a>
