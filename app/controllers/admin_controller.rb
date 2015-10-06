@@ -30,7 +30,7 @@ class AdminController < ApplicationController
     #create model
     bar = Bar.new(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
 
-    #populate location
+    #populate location from google api TODO: error handling
     bar.populateLocation
 
     #save to db
@@ -87,7 +87,13 @@ class AdminController < ApplicationController
 
     #find record and update
     bar = Bar.find_by_id(id)
-    bar.update(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
+    bar.assign_attributes(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
+
+    #update long and lat from google api TODO: error handling
+    bar.populateLocation
+
+    #save to db
+    bar.save
 
     #redirect to index if bar is valid
     if bar.valid? then
