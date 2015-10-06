@@ -5,15 +5,44 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: myLatLng,
         scrollwheel: false,
-        zoom: 13
+        zoom: 13,
+        mapTypeControl: false,
+        streetViewControl: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    console.log("wat");
+    //make geocoder
+    var geocoder = new google.maps.Geocoder();
 
-    // Create a marker and set its position.
-    var marker = new google.maps.Marker({
-        map: map,
-        position: myLatLng,
-        title: 'Hello World!'
-    });
+    //get list of bars
+    barList = [];
+    barList = $('#bar-data').data('bars');
+
+
+    //create marker for each bar
+    //$.each(barList, function(index, bar){
+    //
+    //    var address = bar.address + ', ' + bar.city + ', ' + bar.zip;
+    //    geocodeAddress(address, geocoder, map);
+    //});
+
+
 };
+
+function geocodeAddress(address, geocoder, resultsMap) {
+
+    geocoder.geocode({'address': address}, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK)
+        {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: resultsMap,
+                position: results[0].geometry.location
+            });
+        }
+        else
+        {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
