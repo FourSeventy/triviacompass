@@ -9,6 +9,12 @@
     //init function that is called by the map api script after it is loaded
     mapPage.initMap = function() {
 
+        //if there is no map div on this page, return
+        if(!$('#map').length)
+        {
+            return;
+        }
+
         var bostonLatLng = {lat: 42.360082, lng: -71.0589};
 
         // Create a map object and specify the DOM element for display.
@@ -42,7 +48,7 @@
 
             infoWindowList.push(infowindow);
 
-            
+
             //bind click listener to open window
             marker.addListener('click', function() {
 
