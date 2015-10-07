@@ -39,6 +39,7 @@
             });
 
             markerList.push(marker);
+            marker.trivia_day = bar.trivia_day;
 
 
             //create info window
@@ -53,8 +54,8 @@
             marker.addListener('click', function() {
 
                 //close other windows
-                $.each(infoWindowList, function(index, window){
-                    window.close();
+                $.each(infoWindowList, function(){
+                    this.close();
                 });
 
                 //open this one
@@ -63,6 +64,41 @@
 
         });
     }
+
+
+    mapPage.filterMarkers = function(day)
+    {
+
+        $.each(markerList,function(){
+            this.setVisible(true);
+        });
+
+        if(day === "All")
+        {
+            return;
+        }
+
+        $.each(markerList,function(){
+            
+            if(this.trivia_day !== day)
+            {
+                this.setVisible(false);
+            }
+
+        });
+
+
+    }
+
+    $(document).ready(function(){
+
+        $('#map-filter').change(function(){
+
+            var option = $(this).find('option:selected').val();
+
+            mapPage.filterMarkers(option);
+        });
+    });
 
 
 })(window.mapPage = window.mapPage || {});
