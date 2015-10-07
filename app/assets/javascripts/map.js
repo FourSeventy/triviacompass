@@ -70,6 +70,8 @@
     {
 
         $.each(markerList,function(){
+
+           // this.setAnimation(google.maps.Animation.DROP)
             this.setVisible(true);
         });
 
@@ -79,7 +81,7 @@
         }
 
         $.each(markerList,function(){
-            
+
             if(this.trivia_day !== day)
             {
                 this.setVisible(false);
