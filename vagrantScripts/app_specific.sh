@@ -20,6 +20,10 @@ sudo sudo -u postgres psql -1 -c "drop database Template1;"
 sudo sudo -u postgres psql -1 -c "create database template1 with owner=postgres encoding='UTF-8' lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;"
 sudo sudo -u postgres psql -1 -c "update pg_database set datistemplate=true where datname='template1';"
 
+#set timezone to EST
+sudo rm /etc/localtime
+sudo ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
+
 #create db
 rake db:create
 rake db:schema:load
