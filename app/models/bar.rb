@@ -22,18 +22,26 @@ class Bar < ActiveRecord::Base
 
   def populateLocation
 
+    #define parts of request
     endpoint ='https://maps.googleapis.com/maps/api/geocode/json'
     key = Rails.configuration.google_maps_api_key
     address_param= CGI.escape("#{self.address} #{self.city} #{self.state} #{self.zip}")
 
+    #send HTTP request
     raw_response = HTTP.get("#{endpoint}?key=#{key}&address=#{address_param}")
 
-    #TODO: check for errors
+    #parse response to json
     response = JSON.parse raw_response.to_s
-    location = response['results'][0]['geometry']['location']
 
+    #raise exception if response isn't ok
+    raise 'No Results' if response['status'] != 'OK'
+
+    #set lat and long from response
+    location = response['results'][0]['geometry']['location']
     self.lat = location['lat']
     self.long = location['lng']
+
+    return
 
   end
 

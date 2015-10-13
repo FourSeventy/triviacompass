@@ -30,8 +30,14 @@ class AdminController < ApplicationController
     #create model
     bar = Bar.new(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
 
-    #populate location from google api TODO: error handling
-    bar.populateLocation
+    begin
+      #populate location from google api
+      bar.populateLocation
+    rescue
+
+      logger.error "Error populating bar location for #{name} #{address}"
+
+    end
 
     #save to db
     bar.save
@@ -89,8 +95,14 @@ class AdminController < ApplicationController
     bar = Bar.find_by_id(id)
     bar.assign_attributes(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
 
-    #update long and lat from google api TODO: error handling
-    bar.populateLocation
+    begin
+      #populate location from google api
+      bar.populateLocation
+    rescue
+
+      logger.error "Error populating bar location for #{name} #{address}"
+
+    end
 
     #save to db
     bar.save
