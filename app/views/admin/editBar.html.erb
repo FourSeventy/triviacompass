@@ -1,7 +1,16 @@
 <div class="container">
 
   <div class="row">
-    <h1> Edit Bar</h1>
+    <div class="col-md-2">
+      <h1> Edit Bar</h1>
+    </div>
+    <div class="col-md-10">
+        <%= form_tag '/admin/deleteBar/', method: 'post' do%>
+
+            <%= hidden_field_tag :id, @bar.id %>
+            <%= submit_tag 'Delete', class:'btn btn-danger' %>
+        <% end %>
+    </div>
   </div>
 
   <% unless flash[:errors].nil? %>
@@ -10,61 +19,62 @@
       <%end %>
   <%end%>
 
-  <%= form_tag '/admin/editBar', method: 'post'  do %>
+  <div id="edit-form">
+      <%= form_tag '/admin/editBar', method: 'post'  do %>
 
-      <%= hidden_field_tag :id, @bar.id %>
+          <%= hidden_field_tag :id, @bar.id %>
 
-      <div class="row">
-        <div class="col-md-4 form-group">
-          <%= label_tag :name, 'Name' %>
-          <%= text_field_tag :name, @bar.name, class: 'form-control' %>
-        </div>
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <%= label_tag :name, 'Name' %>
+              <%= text_field_tag :name, @bar.name, class: 'form-control' %>
+            </div>
 
-        <div class="col-md-4 form-group">
-          <%= label_tag :address, 'Address' %>
-          <%= text_field_tag :address, @bar.address, class: 'form-control' %>
-        </div>
+            <div class="col-md-4 form-group">
+              <%= label_tag :address, 'Address' %>
+              <%= text_field_tag :address, @bar.address, class: 'form-control' %>
+            </div>
 
-        <div class="col-md-4 form-group">
-          <%= label_tag :city, 'City' %>
-          <%= text_field_tag :city, @bar.city, class: 'form-control' %>
-        </div>
-      </div>
-
-
-      <div class="row">
-
-        <div class="col-md-4 form-group">
-          <%= label_tag :state, 'State' %>
-          <%= text_field_tag :state, @bar.state, class: 'form-control' %>
-        </div>
+            <div class="col-md-4 form-group">
+              <%= label_tag :city, 'City' %>
+              <%= text_field_tag :city, @bar.city, class: 'form-control' %>
+            </div>
+          </div>
 
 
-        <div class="col-md-4 form-group">
-          <%= label_tag :zip, 'Zip' %>
-          <%= text_field_tag :zip, @bar.zip, class: 'form-control' %>
-        </div>
+          <div class="row">
 
-        <div class="col-md-4 form-group">
-          <%= label_tag :phone, 'Phone' %>
-          <%= text_field_tag :phone, @bar.phone, class: 'form-control' %>
-        </div>
-      </div>
+            <div class="col-md-4 form-group">
+              <%= label_tag :state, 'State' %>
+              <%= text_field_tag :state, @bar.state, class: 'form-control' %>
+            </div>
 
-      <div class="row">
-        <div class="col-md-6 form-group">
-          <%= label_tag :time, 'Trivia Time' %>
-          <%= text_field_tag :time, @bar.trivia_time , class: 'form-control' %>
-        </div>
 
-        <div class="col-md-6 form-group">
-          <%= label_tag :day, 'Trivia Day' %>
-          <%= select_tag :day, options_for_select([['Sunday','Sunday'],['Monday','Monday'],['Tuesday','Tuesday'],['Wednesday','Wednesday'],['Thursday','Thursday'],['Friday','Friday']], @bar.trivia_day), class: 'form-control' %>
-        </div>
-      </div>
+            <div class="col-md-4 form-group">
+              <%= label_tag :zip, 'Zip' %>
+              <%= text_field_tag :zip, @bar.zip, class: 'form-control' %>
+            </div>
 
-      <%= submit_tag 'Update', class:'btn btn-primary' %>
-  <%end%>
+            <div class="col-md-4 form-group">
+              <%= label_tag :phone, 'Phone' %>
+              <%= text_field_tag :phone, @bar.phone, class: 'form-control' %>
+            </div>
+          </div>
 
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <%= label_tag :time, 'Trivia Time' %>
+              <%= text_field_tag :time, @bar.trivia_time , class: 'form-control' %>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <%= label_tag :day, 'Trivia Day' %>
+              <%= select_tag :day, options_for_select([['Sunday','Sunday'],['Monday','Monday'],['Tuesday','Tuesday'],['Wednesday','Wednesday'],['Thursday','Thursday'],['Friday','Friday']], @bar.trivia_day), class: 'form-control' %>
+            </div>
+          </div>
+
+          <%= submit_tag 'Update', class:'btn btn-primary' %>
+      <%end%>
+  </div>
 
 </div>

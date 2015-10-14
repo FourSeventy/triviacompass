@@ -73,7 +73,7 @@ class AdminController < ApplicationController
     bar_id = params[:id]
 
     #get bar from id
-    @bar = Bar.find_by_id bar_id
+    @bar = Bar.find bar_id
 
   end
 
@@ -92,7 +92,7 @@ class AdminController < ApplicationController
     trivia_day = params[:day]
 
     #find record and update
-    bar = Bar.find_by_id(id)
+    bar = Bar.find id
     bar.assign_attributes(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
 
     begin
@@ -119,6 +119,18 @@ class AdminController < ApplicationController
     end
 
 
+  end
+
+
+  #POST admin/deletebar
+  def deleteBar
+
+    id = params[:id]
+
+    bar = Bar.find id
+    bar.destroy
+
+    redirect_to action: 'index'
   end
 
 end

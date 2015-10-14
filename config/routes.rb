@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   post 'admin/newBar' => 'admin#createBar'
   get 'admin/editBar/:id' => 'admin#editBar'
   post 'admin/editBar' => 'admin#updateBar'
+  post 'admin/deleteBar' => 'admin#deleteBar'
 
 
   #map page
