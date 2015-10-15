@@ -19,6 +19,42 @@ class Bar < ActiveRecord::Base
 
 
 
+  def self.getBarsByDay
+
+    #pull all bars from DB for listing ordered by trivia_day
+    all_bars = Bar.all().order(:trivia_day)
+
+    #divide out bars based on trivia day
+    day_hash = {sunday: [], monday: [], tuesday: [], wednesday: [], thursday: [], friday: [], saturday: []}
+
+    #marshal out bars
+    all_bars.each do |bar|
+
+      case bar.trivia_day
+
+        when 'Sunday' then day_hash[:sunday].push bar
+        when 'Monday' then day_hash[:monday].push bar
+        when 'Tuesday' then day_hash[:tuesday].push bar
+        when 'Wednesday' then day_hash[:wednesday].push bar
+        when 'Thursday' then day_hash[:thursday].push bar
+        when 'Friday' then day_hash[:friday].push bar
+        when 'Saturday' then day_hash[:saturday].push bar
+        else
+
+      end
+    end
+
+    #sort each day by time
+    day_hash.each do |day, bars|
+      bars.sort! do |a, b|
+        a.trivia_time <=> b.trivia_time
+      end
+    end
+
+    return day_hash
+
+  end
+
 
   def populateLocation
 

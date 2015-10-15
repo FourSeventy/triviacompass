@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <% @sunday_bars.each do |bar|%>
+  <% @bars_by_day[:sunday].each do |bar|%>
       <div class="row">
         <div class="col-md-4">
           <%= bar.trivia_time %>
@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <% @monday_bars.each do |bar|%>
+  <% @bars_by_day[:monday].each do |bar|%>
       <div class="row">
         <div class="col-md-4">
           <%= bar.trivia_time %>
@@ -48,7 +48,7 @@
     </div>
   </div>
 
-  <% @tuesday_bars.each do |bar|%>
+  <% @bars_by_day[:tuesday].each do |bar|%>
       <div class="row">
         <div class="col-md-4">
           <%= bar.trivia_time %>
@@ -68,7 +68,7 @@
     </div>
   </div>
 
-  <% @wednesday_bars.each do |bar|%>
+  <% @bars_by_day[:wednesday].each do |bar|%>
       <div class="row">
         <div class="col-md-4">
           <%= bar.trivia_time %>
@@ -88,7 +88,7 @@
     </div>
   </div>
 
-  <% @thursday_bars.each do |bar|%>
+  <% @bars_by_day[:thursday].each do |bar|%>
       <div class="row">
         <div class="col-md-4">
           <%= bar.trivia_time %>
@@ -108,7 +108,7 @@
     </div>
   </div>
 
-  <% @friday_bars.each do |bar|%>
+  <% @bars_by_day[:friday].each do |bar|%>
       <div class="row">
         <div class="col-md-4">
           <%= bar.trivia_time %>
@@ -128,7 +128,7 @@
     </div>
   </div>
 
-  <% @saturday_bars.each do |bar|%>
+  <% @bars_by_day[:saturday].each do |bar|%>
       <div class="row">
         <div class="col-md-4">
           <%= bar.trivia_time %>
