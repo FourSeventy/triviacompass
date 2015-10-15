@@ -22,8 +22,9 @@ Rails.application.routes.draw do
 
   #rating api
   get 'ratings' => 'rating#list'
-  get 'ratings/create' => 'rating#createRating'
   get 'ratings/:id' => 'rating#get'
+  post 'ratings' => 'rating#new'
+
 
 
 
