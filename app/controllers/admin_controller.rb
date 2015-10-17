@@ -2,8 +2,12 @@ class AdminController < ApplicationController
 
   #GET admin
   def index
+
     #pull all bars from DB for listing
     @all_bars = Bar.all().order(:id)
+
+    #get ratings for bars
+    @ratings = Rating.getAllRatings
 
   end
 
