@@ -87,6 +87,7 @@ test:
 #
 production:
   <<: *default
-  database: TriviaSite_production
-  username: TriviaSite
+  database: TriviaCompass
+  host: localhost
+  username: pguser
   password: <%= ENV['TRIVIASITE_DATABASE_PASSWORD'] %>
