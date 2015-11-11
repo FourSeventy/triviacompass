@@ -1,4 +1,5 @@
-require "http"
+require 'http'
+require 'haversine'
 
 
 class Bar < ActiveRecord::Base
@@ -19,10 +20,32 @@ class Bar < ActiveRecord::Base
 
 
 
-  def self.getBarsByDay
+  def self.get_bars_in_radius(lat, long, radius)
 
-    #pull all bars from DB for listing ordered by trivia_day
-    all_bars = Bar.all().order(:trivia_day)
+
+    #pull all bars from DB
+    all_bars = Bar.all()
+
+    filtered_list = []
+
+    all_bars.each() do |bar|
+
+      #get distance to bar
+      dist = Haversine.distance( bar.lat.to_f, bar.long.to_f, lat, long ).to_miles
+
+      #add to list if we are within radius
+      if dist <= radius
+        filtered_list.push bar
+      end
+
+    end
+
+    return filtered_list
+
+  end
+
+
+  def self.sort_bars_into_days(all_bars)
 
     #divide out bars based on trivia day
     day_hash = {sunday: [], monday: [], tuesday: [], wednesday: [], thursday: [], friday: [], saturday: []}

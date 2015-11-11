@@ -6,9 +6,6 @@ Rails.application.routes.draw do
   #root
   root 'home#index'
 
-  #bars listing
-  get 'bars' => 'bars#index'
-
   #admin panel
   get 'admin' => 'admin#index'
   get 'admin/newBar' => 'admin#newBar'
@@ -17,13 +14,13 @@ Rails.application.routes.draw do
   post 'admin/editBar' => 'admin#updateBar'
   post 'admin/deleteBar' => 'admin#deleteBar'
 
-  #map page
-  get 'map' => 'map#index'
 
   #rating api
   get 'ratings' => 'rating#list'
   get 'ratings/:id' => 'rating#get'
   post 'ratings' => 'rating#new'
+
+  #bar api
 
 
 

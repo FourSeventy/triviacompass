@@ -6,7 +6,7 @@ class Rating < ActiveRecord::Base
   validates :ip, presence: true
 
 
-  def self.getAllRatings
+  def self.get_all_ratings
 
     #pull all ratings from the db
     all_ratings = Rating.all
@@ -38,7 +38,7 @@ class Rating < ActiveRecord::Base
   end
 
 
-  def self.getRating(id)
+  def self.get_rating(id)
 
     #get all ratings for given id
     ratings = Rating.where(bar_id: id)

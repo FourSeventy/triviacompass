@@ -3,7 +3,7 @@ class RatingController < ApplicationController
   #GET ratings
   def list
 
-    ratings = Rating.getAllRatings
+    ratings = Rating.get_all_ratings
 
     #return the hash as json
     render :json => ratings
@@ -14,7 +14,7 @@ class RatingController < ApplicationController
   #GET ratings/:id
   def get
 
-    rating = Rating.getRating(params[:id])
+    rating = Rating.get_rating(params[:id])
 
     #return as json
     render :json => rating

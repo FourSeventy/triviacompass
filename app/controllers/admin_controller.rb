@@ -7,7 +7,7 @@ class AdminController < ApplicationController
     @all_bars = Bar.all().order(:id)
 
     #get ratings for bars
-    @ratings = Rating.getAllRatings
+    @ratings = Rating.get_all_ratings
 
   end
 

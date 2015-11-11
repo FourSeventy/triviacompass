@@ -1,28 +1,47 @@
 <div class="container">
+
   <div class="row">
-    <h1> Trivia Compass</h1>
+    <div class="col-md-12">
+      <h2><%= @location %> </h2>
+    </div>
   </div>
 
-  <div class = "row">
-    <h2> Tonights Trivia</h2>
-  </div>
-  <% @tonights_bars.each do |bar|%>
-      <div class="row">
-        <div class="col-md-4">
-          <%= bar.trivia_time %>
-        </div>
-        <div class="col-md-4">
-          <%= bar.name %>
-        </div>
-        <div class="col-md-4">
-          <%= bar.address %>
-        </div>
-      </div>
+  <%= content_tag "div", id: "bar-data", data: {bars: @bars } do %>
   <% end %>
 
+  <div id="map" style="width: 1000px; height: 600px;"></div>
 
-  <div class = "row">
-    <h2> Trivia Near you</h2>
-  </div>
+
+
+  <h1>Weekly Schedule</h1>
+
+  <% [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday].each() do |day| %>
+
+      <% unless @bars_by_day[day].empty? %>
+
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="day-header"><%= day.to_s.titleize %></h3>
+            </div>
+          </div>
+
+          <% @bars_by_day[day].each do |bar| %>
+              <div class="row">
+                <div class="col-md-4">
+                  <%= bar.trivia_time %>
+                </div>
+                <div class="col-md-4">
+                  <%= bar.name %>
+                </div>
+                <div class="col-md-4">
+                  <%= bar.address %>
+                </div>
+              </div>
+          <% end %>
+
+      <% end %>
+
+  <% end %>
+
 
 </div>
