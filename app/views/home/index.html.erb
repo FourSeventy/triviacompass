@@ -1,47 +1,34 @@
-<div class="container">
+<div class="container" ng-controller = "HomeController" ng-cloak>
 
-  <div class="row">
-    <div class="col-md-12">
-      <h2><%= @location %> </h2>
-    </div>
-  </div>
-
+  <!-- pre-populated bar list data -->
   <%= content_tag "div", id: "bar-data", data: {bars: @bars } do %>
   <% end %>
 
+  <!-- pre-populated bar by day data -->
+  <%= content_tag "div", id: "bar-day-data", data: {days: @bars_by_day } do %>
+  <% end %>
+
+  <!-- pre-populated bar list data -->
+  <%= content_tag "div", id: "location-data", data: {location: @location } do %>
+  <% end %>
+
+
+  <!-- location-->
+  <div class="row">
+    <div class="col-md-12">
+      <h2>{{location}} </h2>
+    </div>
+  </div>
+
+
+  <!-- map -->
   <div id="map" style="width: 1000px; height: 600px;"></div>
 
 
 
   <h1>Weekly Schedule</h1>
 
-  <% [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday].each() do |day| %>
-
-      <% unless @bars_by_day[day].empty? %>
-
-          <div class="row">
-            <div class="col-md-12">
-              <h3 class="day-header"><%= day.to_s.titleize %></h3>
-            </div>
-          </div>
-
-          <% @bars_by_day[day].each do |bar| %>
-              <div class="row">
-                <div class="col-md-4">
-                  <%= bar.trivia_time %>
-                </div>
-                <div class="col-md-4">
-                  <%= bar.name %>
-                </div>
-                <div class="col-md-4">
-                  <%= bar.address %>
-                </div>
-              </div>
-          <% end %>
-
-      <% end %>
-
-  <% end %>
+  <weekly-schedule bars = "dayList"></weekly-schedule>
 
 
 </div>

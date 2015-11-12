@@ -61,9 +61,6 @@ GEM
     http-form_data (1.0.1)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
-    jbuilder (2.3.1)
-      activesupport (>= 3.0.0, < 5)
-      multi_json (~> 1.2)
     json (1.8.3)
     kgio (2.10.0)
     loofah (2.0.3)
@@ -73,7 +70,6 @@ GEM
     mime-types (2.6.2)
     mini_portile (0.6.2)
     minitest (5.8.0)
-    multi_json (1.11.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.18.3)
@@ -91,6 +87,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.4)
       sprockets-rails
+    rails-assets-angular (1.4.7)
     rails-assets-bootstrap (3.3.5)
       rails-assets-jquery (>= 1.9.1)
     rails-assets-jquery (2.1.4)
@@ -155,9 +152,9 @@ DEPENDENCIES
   byebug
   haversine
   http
-  jbuilder (~> 2.0)
   pg
   rails (= 4.2.4)
+  rails-assets-angular!
   rails-assets-bootstrap!
   rails-assets-jquery (>= 2.1.4)!
   sass-rails (~> 5.0)

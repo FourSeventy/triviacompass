@@ -26,9 +26,11 @@
   <!-- favicon -->
   <link rel="shortcut icon" href="/assets/img/favicon.png">
 
-  <!-- head js -->
+  <!-- html5 shiv -->
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
+  <!-- application javascript -->
+  <%= javascript_include_tag 'application' %>
 
   <!-- application css -->
   <%= stylesheet_link_tag    'application', media: 'all'%>
@@ -45,7 +47,7 @@
   <%= render 'layouts/header' %>
 
   <!-- body -->
-  <div class="<%= controller_name %> <%= action_name %>">
+  <div class="<%= controller_name %> <%= action_name %>" ng-app="TriviaApp">
      <%= yield %>
   </div>
 
@@ -55,12 +57,9 @@
 <!-- footer -->
 <%= render 'layouts/footer' %>
 
-
-<!-- application javascript -->
-<%= javascript_include_tag 'application' %>
-
 <!-- google maps -->
-<script async defer src= <%= "https://maps.googleapis.com/maps/api/js?key=#{Rails.configuration.google_maps_api_key}&callback=homePage.initMap"%>></script>
+<script async defer src= <%= "https://maps.googleapis.com/maps/api/js?key=#{Rails.configuration.google_maps_api_key}&callback=window.initMap"%>></script>
+
 
 </body>
 </html>
