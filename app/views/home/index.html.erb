@@ -1,14 +1,11 @@
 <div class="container" ng-controller = "HomeController" ng-cloak>
 
-  <!-- pre-populated bar list data -->
-  <%= content_tag "div", id: "bar-data", data: {bars: @bars } do %>
-  <% end %>
 
   <!-- pre-populated bar by day data -->
-  <%= content_tag "div", id: "bar-day-data", data: {days: @bars_by_day } do %>
+  <%= content_tag "div", id: "bar-data", data: {bars: @bars_by_day } do %>
   <% end %>
 
-  <!-- pre-populated bar list data -->
+  <!-- pre-populated location data -->
   <%= content_tag "div", id: "location-data", data: {location: @location } do %>
   <% end %>
 
@@ -20,15 +17,14 @@
     </div>
   </div>
 
-
+  <button ng-click = "clearList()"> Clear</button>
+  <button ng-click = "populateList()"> Populate</button>
   <!-- map -->
   <div id="map" style="width: 1000px; height: 600px;"></div>
 
 
-
-  <h1>Weekly Schedule</h1>
-
-  <weekly-schedule bars = "dayList"></weekly-schedule>
+  <!-- weekly schedule -->
+  <weekly-schedule bars="barList"></weekly-schedule>
 
 
 </div>

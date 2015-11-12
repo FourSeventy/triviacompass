@@ -1,18 +1,38 @@
-app.controller('HomeController', ['$scope', function($scope) {
-
-    //bar list
-    barList = [];
-    barList = $('#bar-data').data('bars');
+app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
     //bar by day list
-    $scope.dayList = [];
-    $scope.dayList = $('#bar-day-data').data('days');
+    $scope.barList = {};
+    $scope.barList = $('#bar-data').data('bars');
 
     //location
     $scope.location = $('#location-data').data('location');
 
     infoWindowList = [];
     markerList= [];
+
+
+    $scope.clearList = function() {
+        $scope.barList = {};
+    }
+
+    $scope.populateList = function(){
+
+        //make http call to bar endpoint
+        $http({
+            method: 'GET',
+            url: '/bars'
+        }).then(function successCallback(response) {
+
+            console.log(response);
+            $scope.barList = response.data;
+
+        }, function errorCallback(response) {
+
+        });
+
+    }
+
+
 
 
     //init function that is called by the map api script after it is loaded
@@ -38,44 +58,45 @@ app.controller('HomeController', ['$scope', function($scope) {
         });
 
         //create marker for each bar
-        $.each(barList, function(index, bar){
+        $.each($scope.barList, function(day, bars){
+            $.each(bars, function(index, bar){
 
-            //create marker
-            var marker = new google.maps.Marker({
-                position: {lat: parseFloat(bar.lat), lng: parseFloat(bar.long)},
-                map: map,
-                animation: google.maps.Animation.DROP,
-                title: bar.name
-            });
-
-            markerList.push(marker);
-            marker.trivia_day = bar.trivia_day;
-
-
-            //create info window
-            var infowindow = new google.maps.InfoWindow({
-                content: '<div class="marker-window"> <p>'+bar.name+'</p> <p>'+bar.address+'</p> <p>'+bar.city + ", " + bar.state + " " + bar.zip+'</p></div>'
-            });
-
-            infoWindowList.push(infowindow);
-
-
-            //bind click listener to open window
-            marker.addListener('click', function() {
-
-                //close other windows
-                $.each(infoWindowList, function(){
-                    this.close();
+                //create marker
+                var marker = new google.maps.Marker({
+                    position: {lat: parseFloat(bar.lat), lng: parseFloat(bar.long)},
+                    map: map,
+                    animation: google.maps.Animation.DROP,
+                    title: bar.name
                 });
 
-                //open this one
-                infowindow.open(map, marker);
+                markerList.push(marker);
+                marker.trivia_day = bar.trivia_day;
+
+
+                //create info window
+                var infowindow = new google.maps.InfoWindow({
+                    content: '<div class="marker-window"> <p>'+bar.name+'</p> <p>'+bar.address+'</p> <p>'+bar.city + ", " + bar.state + " " + bar.zip+'</p></div>'
+                });
+
+                infoWindowList.push(infowindow);
+
+
+                //bind click listener to open window
+                marker.addListener('click', function() {
+
+                    //close other windows
+                    $.each(infoWindowList, function(){
+                        this.close();
+                    });
+
+                    //open this one
+                    infowindow.open(map, marker);
+                });
+
             });
-
         });
+
     }
-
-
 
 
 }]);

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post 'ratings' => 'rating#new'
 
   #bar api
+  get 'bars' => 'bars#list'
 
 
 
