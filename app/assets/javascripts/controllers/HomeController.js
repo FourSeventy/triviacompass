@@ -13,6 +13,10 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
     infoWindowList = [];
     markerList= [];
 
+    $scope.autoComplete = null;
+
+
+
 
     $scope.clearList = function() {
         $scope.barList = {};
@@ -94,6 +98,14 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
 
 
+    var placeChanged = function() {
+
+        var place = $scope.autocomplete.getPlace();
+        console.log('lat:' + place.geometry.location.lat());
+        console.log('long:' + place.geometry.location.lng());
+
+    }
+
     //init function that is called by the map api script after it is loaded
     window.initMap = function() {
 
@@ -116,9 +128,12 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
-
         //refresh map
         $scope.refreshMap();
+
+        //init autocomplete
+        $scope.autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{types: ['geocode']});
+        $scope.autocomplete.addListener('place_changed', placeChanged);
 
     }
 

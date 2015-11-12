@@ -58,7 +58,7 @@
 <%= render 'layouts/footer' %>
 
 <!-- google maps -->
-<script async defer src= <%= "https://maps.googleapis.com/maps/api/js?key=#{Rails.configuration.google_maps_api_key}&callback=window.initMap"%>></script>
+<script async defer src= <%= "https://maps.googleapis.com/maps/api/js?key=#{Rails.configuration.google_maps_api_key}&callback=window.initMap&libraries=places"%>></script>
 
 
 </body>
