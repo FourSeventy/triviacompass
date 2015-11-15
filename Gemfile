@@ -16,6 +16,8 @@ gem 'http'
 gem 'haversine'
 #web scraping
 gem 'mechanize', '~> 2.7'
+#seed dump
+gem 'seed_dump'
 
 
 # bundle exec rake doc:rails generates the API under doc/api.
