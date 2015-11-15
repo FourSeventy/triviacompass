@@ -67,11 +67,23 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mechanize (2.7.3)
+      domain_name (~> 0.5, >= 0.5.1)
+      http-cookie (~> 1.0)
+      mime-types (~> 2.0)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 2.5, >= 2.5.2)
+      nokogiri (~> 1.4)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (>= 0.0.9, < 0.2)
     mime-types (2.6.2)
     mini_portile (0.6.2)
     minitest (5.8.0)
+    net-http-digest_auth (1.4)
+    net-http-persistent (2.9.4)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    ntlm-http (0.1.1)
     pg (0.18.3)
     rack (1.6.4)
     rack-test (0.6.3)
@@ -144,6 +156,7 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    webrobots (0.1.1)
 
 PLATFORMS
   ruby
@@ -152,6 +165,7 @@ DEPENDENCIES
   byebug
   haversine
   http
+  mechanize (~> 2.7)
   pg
   rails (= 4.2.4)
   rails-assets-angular!

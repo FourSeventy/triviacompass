@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'admin/editBar/:id' => 'admin#editBar'
   post 'admin/editBar' => 'admin#updateBar'
   post 'admin/deleteBar' => 'admin#deleteBar'
+  get 'admin/scrape' => 'admin#scrape'
+  post 'admin/scrape' => 'admin#run_scrape'
 
 
   #rating api

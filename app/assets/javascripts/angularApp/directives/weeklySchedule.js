@@ -4,6 +4,6 @@ app.directive('weeklySchedule', function() {
         scope: {
             bars: '='
         },
-        templateUrl: 'assets/directives/weeklySchedule.html'
+        templateUrl: 'assets/angularApp/directives/weeklySchedule.html'
     };
 });

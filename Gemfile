@@ -14,6 +14,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'http'
 #lat and long calculation lib
 gem 'haversine'
+#web scraping
+gem 'mechanize', '~> 2.7'
 
 
 # bundle exec rake doc:rails generates the API under doc/api.

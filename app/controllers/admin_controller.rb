@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
 
+  include AdminHelper
+
   #GET admin
   def index
 
@@ -135,6 +137,21 @@ class AdminController < ApplicationController
     bar.destroy
 
     redirect_to action: 'index'
+  end
+
+  #GET admin/scrape
+  def scrape
+
+  end
+
+  #POST admin/scrape
+  def run_scrape
+
+    result = AdminHelper.scrape_geeks
+
+    render :json => {result: result}
+
+
   end
 
 end
