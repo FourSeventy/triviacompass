@@ -17,34 +17,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
 
 
-
-    $scope.clearList = function() {
-        $scope.barList = {};
-
-        $scope.refreshMap();
-    }
-
-    $scope.populateList = function(){
-
-        //make http call to bar endpoint
-        $http({
-            method: 'GET',
-            url: '/bars'
-        }).then(function successCallback(response) {
-
-            $scope.barList = response.data;
-
-            $scope.refreshMap();
-
-        }, function errorCallback(response) {
-
-            console.log('Error getting bar list from server');
-
-        });
-
-    }
-
-    $scope.refreshMap = function() {
+    $scope.refreshMap = function(lat, lng) {
 
         //clear markers
         for (var i = 0; i < markerList.length; i++) {
@@ -93,16 +66,36 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
             });
         });
+
+        //pan map
+        var center = new google.maps.LatLng(lat, lng);
+        $scope.map.panTo(center);
     }
-
-
 
 
     var placeChanged = function() {
 
         var place = $scope.autocomplete.getPlace();
-        console.log('lat:' + place.geometry.location.lat());
-        console.log('long:' + place.geometry.location.lng());
+        var lat = place.geometry.location.lat();
+        var long = place.geometry.location.lng();
+        var radius = 30;
+
+        //make http call to bar endpoint
+        $http({
+            method: 'GET',
+            url: '/bars',
+            params: {lat: lat, long: long, radius: radius}
+        }).then(function successCallback(response) {
+
+            $scope.barList = response.data;
+
+            $scope.refreshMap(lat, long);
+
+        }, function errorCallback(response) {
+
+            console.log('Error getting bar list from server');
+
+        });
 
     }
 
@@ -129,7 +122,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
         });
 
         //refresh map
-        $scope.refreshMap();
+        $scope.refreshMap(bostonLatLng.lat, bostonLatLng.lng);
 
         //init autocomplete
         $scope.autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{types: ['geocode']});

@@ -5,11 +5,9 @@ module AdminHelper
   def self.scrape_geeks
 
     mechanize = Mechanize.new
-
-    bar_array = []
-
     page = mechanize.get('http://www.geekswhodrink.com/pages/venues?action=getAll')
 
+    bar_array = []
 
     #get all bar anchors
     bar_a = page.search('#content a')
@@ -24,7 +22,6 @@ module AdminHelper
       address_parts = result['title'].split('|')
       bar.address = address_parts[0]
       city_state_zip = address_parts[1].split(' ')
-
       bar.city = city_state_zip[0..-3].join(' ')
       bar.state = city_state_zip[-2]
       bar.zip = city_state_zip[-1]
@@ -36,11 +33,10 @@ module AdminHelper
       span =  result.at_xpath('following-sibling::span')
       bar.trivia_time = span.at_xpath('following-sibling::text()').text
 
+      #add bar to array
       bar_array.push bar
     end
 
-    #debug
-    bar_array = bar_array[1...3]
 
     #populate bar lat and long, rate limited to 10 per second
     make_multiple_requests(bar_array) do |bar|

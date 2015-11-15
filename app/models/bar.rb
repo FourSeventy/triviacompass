@@ -26,6 +26,11 @@ class Bar < ActiveRecord::Base
     #pull all bars from DB
     all_bars = Bar.all()
 
+    #if our params are nil return full list
+    if lat == nil or long == nil or radius == nil
+      return all_bars
+    end
+
     filtered_list = []
 
     all_bars.each() do |bar|
