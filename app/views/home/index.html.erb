@@ -1,19 +1,15 @@
 <div class="container" ng-controller = "HomeController" ng-cloak>
 
 
-  <!-- pre-populated bar by day data -->
-  <%= content_tag "div", id: "bar-data", data: {bars: @bars_by_day } do %>
-  <% end %>
-
-  <!-- pre-populated location data -->
-  <%= content_tag "div", id: "location-data", data: {location: @location } do %>
+  <!-- pre-populated bar and location data -->
+  <%= content_tag "div", id: "default-data", data:  {preloaded: @default_data} do %>
   <% end %>
 
 
   <!-- location-->
   <div class="row">
     <div class="col-md-12">
-      <h2>{{location}} </h2>
+      <h2>{{location.name}} </h2>
     </div>
   </div>
 
@@ -21,8 +17,6 @@
     <input id="autocomplete" placeholder="Enter your address" type="text"></input> <!-- onFocus="geolocate()" -->
   </div>
 
-  <button ng-click = "clearList()"> Clear</button>
-  <button ng-click = "populateList()"> Populate</button>
   <!-- map -->
   <div id="map" style="width: 1000px; height: 600px;"></div>
 

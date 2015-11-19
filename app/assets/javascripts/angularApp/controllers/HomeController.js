@@ -1,32 +1,69 @@
 app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
-    //map reference
-    $scope.map = null;
-
     //bar by day list
     $scope.barList = {};
-    $scope.barList = $('#bar-data').data('bars');
 
     //location
-    $scope.location = $('#location-data').data('location');
+    $scope.location = {}; //{name: foo, lat: bar, lng: baz}
 
-    infoWindowList = [];
-    markerList= [];
+    //map reference
+    window.map = null;
 
-    $scope.autoComplete = null;
+    //map markers
+    window.infoWindowList = [];
+    window.markerList= [];
+
+    //autocomplete box reference
+    window.autoComplete = null;
 
 
 
-    $scope.refreshMap = function(lat, lng) {
+    //init function that is called by the map api script after it is loaded
+    window.initMap = function() {
+
+        //if there is no map div on this page, return
+        if(!$('#map').length)
+        {
+            return;
+        }
+
+        //get default bar and location data from page
+        var default_data = $('#default-data').data('preloaded');
+        $scope.barList = default_data.bars;
+        $scope.location = default_data.location;
+
+
+        // Create a map object and specify the DOM element for display.
+        window.map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: $scope.location.lat, lng: $scope.location.lng},
+            //scrollwheel: false,
+            zoom: 13,
+            mapTypeControl: false,
+            streetViewControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        //init autocomplete search box
+        window.autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{types: ['geocode']});
+        window.autocomplete.addListener('place_changed', placeChanged);
+
+        //refresh map
+        $scope.refreshMap();
+
+    }
+
+
+    $scope.refreshMap = function() {
 
         //clear markers
-        for (var i = 0; i < markerList.length; i++) {
-            markerList[i].setMap(null);
+        for (var i = 0; i < window.markerList.length; i++)
+        {
+            window.markerList[i].setMap(null);
         }
-        markerList = [];
+        window.markerList = [];
 
         //clear info list
-        infoWindowList = [];
+        window.infoWindowList = [];
 
         //create marker for each bar
         $.each($scope.barList, function(day, bars){
@@ -35,12 +72,12 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
                 //create marker
                 var marker = new google.maps.Marker({
                     position: {lat: parseFloat(bar.lat), lng: parseFloat(bar.long)},
-                    map: $scope.map,
+                    map: window.map,
                     animation: google.maps.Animation.DROP,
                     title: bar.name
                 });
 
-                markerList.push(marker);
+                window.markerList.push(marker);
                 marker.trivia_day = bar.trivia_day;
 
 
@@ -49,14 +86,14 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
                     content: '<div class="marker-window"> <p>'+bar.name+'</p> <p>'+bar.address+'</p> <p>'+bar.city + ", " + bar.state + " " + bar.zip+'</p></div>'
                 });
 
-                infoWindowList.push(infowindow);
+                window.infoWindowList.push(infowindow);
 
 
                 //bind click listener to open window
                 marker.addListener('click', function() {
 
                     //close other windows
-                    $.each(infoWindowList, function(){
+                    $.each(window.infoWindowList, function(){
                         this.close();
                     });
 
@@ -68,28 +105,31 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
         });
 
         //pan map
-        var center = new google.maps.LatLng(lat, lng);
-        $scope.map.panTo(center);
+        var center = new google.maps.LatLng($scope.location.lat, $scope.location.lng);
+        window.map.panTo(center);
     }
 
 
     var placeChanged = function() {
 
-        var place = $scope.autocomplete.getPlace();
-        var lat = place.geometry.location.lat();
-        var long = place.geometry.location.lng();
+        //set new location data
+        var place = window.autocomplete.getPlace();
+        $scope.location.name = place.formatted_address;
+        $scope.location.lat = place.geometry.location.lat();
+        $scope.location.lng = place.geometry.location.lng();
         var radius = 30;
 
         //make http call to bar endpoint
         $http({
             method: 'GET',
             url: '/bars',
-            params: {lat: lat, long: long, radius: radius}
+            params: {lat: $scope.location.lat, long: $scope.location.lng, radius: radius}
         }).then(function successCallback(response) {
 
+            //ser new bar list
             $scope.barList = response.data;
 
-            $scope.refreshMap(lat, long);
+            $scope.refreshMap();
 
         }, function errorCallback(response) {
 
@@ -98,37 +138,5 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
         });
 
     }
-
-    //init function that is called by the map api script after it is loaded
-    window.initMap = function() {
-
-
-        //if there is no map div on this page, return
-        if(!$('#map').length)
-        {
-            return;
-        }
-
-        var bostonLatLng = {lat: 42.360082, lng: -71.0589};
-
-        // Create a map object and specify the DOM element for display.
-        $scope.map = new google.maps.Map(document.getElementById('map'), {
-            center: bostonLatLng,
-            //scrollwheel: false,
-            zoom: 13,
-            mapTypeControl: false,
-            streetViewControl: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-
-        //refresh map
-        $scope.refreshMap(bostonLatLng.lat, bostonLatLng.lng);
-
-        //init autocomplete
-        $scope.autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{types: ['geocode']});
-        $scope.autocomplete.addListener('place_changed', placeChanged);
-
-    }
-
 
 }]);

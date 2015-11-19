@@ -1,7 +1,15 @@
+
+//address autocomplete box
 #locationField, #controls {
   position: relative;
   width: 480px;
 }
+
+#locationField {
+  height: 20px;
+  margin-bottom: 20px;
+}
+
 #autocomplete {
   position: absolute;
   top: 0px;
@@ -31,8 +39,4 @@
 }
 .wideField {
   width: 200px;
-}
-#locationField {
-  height: 20px;
-  margin-bottom: 2px;
 }
