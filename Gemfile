@@ -23,8 +23,6 @@ gem 'seed_dump'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
  gem 'unicorn'
@@ -46,7 +44,7 @@ end
 
 #front end sources
 source 'https://rails-assets.org' do
-  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-skeleton', '>=2.0.4'
   gem 'rails-assets-jquery', '>= 2.1.4'
   gem 'rails-assets-angular'
 end

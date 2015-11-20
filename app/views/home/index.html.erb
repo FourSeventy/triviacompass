@@ -7,19 +7,10 @@
 
 
   <!-- location-->
-  <div class="row">
-    <div class="col-md-12">
-      <h2>{{location.name}} </h2>
-    </div>
-  </div>
-
-  <div id="locationField">
-    <input id="autocomplete" placeholder="Enter your address" type="text"></input> <!-- onFocus="geolocate()" -->
-  </div>
+  <search-header location="location"> </search-header>
 
   <!-- map -->
   <div id="map" style="width: 1000px; height: 600px;"></div>
-
 
   <!-- weekly schedule -->
   <weekly-schedule bars="barList"></weekly-schedule>
