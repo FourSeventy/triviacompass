@@ -1,7 +1,7 @@
 class BarsController < ApplicationController
 
-  #GET bars
-  def list
+  #GET /bars
+  def index
 
     #get lat and long query params
     lat = params[:lat]
@@ -18,5 +18,12 @@ class BarsController < ApplicationController
     #return the hash as json
     render :json => bars_by_day
 
+  end
+
+  #GET /bars/:id
+  def show
+    bar = Bar.find(params[:id])
+
+    render :json => bar
   end
 end

@@ -1,7 +1,7 @@
 class RatingController < ApplicationController
 
-  #GET ratings
-  def list
+  #GET /ratings
+  def index
 
     ratings = Rating.get_all_ratings
 
@@ -11,8 +11,8 @@ class RatingController < ApplicationController
   end
 
 
-  #GET ratings/:id
-  def get
+  #GET /ratings/:id
+  def show
 
     rating = Rating.get_rating(params[:id])
 
@@ -23,7 +23,7 @@ class RatingController < ApplicationController
 
 
   #POST ratings
-  def new
+  def create
 
     #determine params
     ip = request.ip

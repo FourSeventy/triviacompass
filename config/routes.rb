@@ -18,12 +18,12 @@ Rails.application.routes.draw do
 
 
   #rating api
-  get 'ratings' => 'rating#list'
-  get 'ratings/:id' => 'rating#get'
-  post 'ratings' => 'rating#new'
+  get 'ratings' => 'rating#index'
+  get 'ratings/:id' => 'rating#show'
+  post 'ratings' => 'rating#create'
 
   #bar api
-  get 'bars' => 'bars#list'
+  get 'bars' => 'bars#index'
 
 
 
