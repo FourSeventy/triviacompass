@@ -2,6 +2,8 @@ class AdminController < ApplicationController
 
   include AdminHelper
 
+  http_basic_authenticate_with :name => 'admin', :password => 'triviaCompassAdmin'
+
   #GET admin
   def index
 
