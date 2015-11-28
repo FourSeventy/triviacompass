@@ -125,7 +125,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
         // Create a map object and specify the DOM element for display.
         window.map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: $scope.location.lat, lng: $scope.location.lng},
-            //scrollwheel: false,
+            scrollwheel: false,
             zoom: 13,
             mapTypeControl: false,
             streetViewControl: false,

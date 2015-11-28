@@ -1,7 +1,7 @@
 .home {
 
 
-  h1, p {
+  h2, h3, p, div {
     letter-spacing: 1px;
   }
 
@@ -11,12 +11,57 @@
     }
 
   .weekly-schedule {
-    h1{
+    h2{
       margin-top: 80px;
+      margin-bottom: 13px;
       text-align: center;
       font-family: Montserrat-Bold, sans-serif;
       font-size: 36px;
       color: #e7a901;
+    }
+
+    .header-line{
+      border: 2px solid #e7a901;
+      margin-bottom: 50px;
+    }
+
+    h3{
+
+      font-family: Montserrat-Regular, sans-serif;
+      font-size: 24px;
+      text-align: center;
+      color: #58595b;
+    }
+
+    span{
+      font-family: Montserrat-Light, sans-serif;
+      font-size: 18px;
+      text-align: center;
+    }
+
+
+    .day-entry{
+      margin-bottom: 43px;
+    }
+
+    .bar-entry{
+      margin-bottom: 55px;
+
+      .time-field{
+        text-align: right;
+      }
+
+      .name-field{
+        text-align:center;
+      }
+
+      .address-field{
+        text-align: left;
+      }
+    }
+
+    .bar-line{
+      border-bottom: 1px solid rgba(88,89,91,.5);
     }
 
   }
