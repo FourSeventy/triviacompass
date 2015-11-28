@@ -18,43 +18,12 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
 
 
-    //init function that is called by the map api script after it is loaded
-    window.initMap = function() {
 
-        //if there is no map div on this page, return
-        if(!$('#map').length)
-        {
-            return;
-        }
-
-        //get default bar and location data from page
-        var default_data = $('#default-data').data('preloaded');
-        $scope.barList = default_data.bars;
-        $scope.location = default_data.location;
-
-
-        // Create a map object and specify the DOM element for display.
-        window.map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: $scope.location.lat, lng: $scope.location.lng},
-            //scrollwheel: false,
-            zoom: 13,
-            mapTypeControl: false,
-            streetViewControl: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-
-        //init autocomplete search box
-        window.autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{types: ['geocode']});
-        window.autocomplete.addListener('place_changed', placeChanged);
-
-        //refresh map
-        $scope.refreshMap();
-
-    }
 
 
     $scope.refreshMap = function() {
 
+        console.log('refresh map');
         //clear markers
         for (var i = 0; i < window.markerList.length; i++)
         {
@@ -112,6 +81,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
     var placeChanged = function() {
 
+        console.log('change');
         //set new location data
         var place = window.autocomplete.getPlace();
         $scope.location.name = place.formatted_address;
@@ -136,6 +106,42 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
             console.log('Error getting bar list from server');
 
         });
+
+    }
+
+    //init function that is called by the map api script after it is loaded
+    window.initMap = function() {
+
+        console.log('init');
+        //if there is no map div on this page, return
+        if(!$('#map').length)
+        {
+            return;
+        }
+
+        //get default bar and location data from page
+        var default_data = $('#default-data').data('preloaded');
+        $scope.barList = default_data.bars;
+        $scope.location = default_data.location;
+
+
+        // Create a map object and specify the DOM element for display.
+        window.map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: $scope.location.lat, lng: $scope.location.lng},
+            //scrollwheel: false,
+            zoom: 13,
+            mapTypeControl: false,
+            streetViewControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        console.log(document.getElementById('autocomplete'));
+        //init autocomplete search box
+        window.autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{types: ['geocode']});
+        window.autocomplete.addListener('place_changed', placeChanged);
+
+        //refresh map
+        $scope.refreshMap();
 
     }
 

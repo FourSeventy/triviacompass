@@ -44,7 +44,6 @@ end
 
 #front end sources
 source 'https://rails-assets.org' do
-  gem 'rails-assets-skeleton', '>=2.0.4'
   gem 'rails-assets-jquery', '>= 2.1.4'
   gem 'rails-assets-angular'
 end

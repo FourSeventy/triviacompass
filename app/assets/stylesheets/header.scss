@@ -1,10 +1,85 @@
 #search-header {
   height: 660px;
   background-image: image_url("header-image.jpg");
+  background-position: center;
+
+  h1, p {
+    letter-spacing: 1px;
+  }
 
   h1 {
     font-family: Proxima-Nova, sans-serif;
     font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
     color: white;
+    margin-top: 50px;
   }
+
+  p{
+    text-align: center;
+
+    &.play-copy-1{
+      margin-top: 145px;
+      margin-bottom: 5px;
+      font-family: Montserrat-Bold, sans-serif;
+      font-size: 42px;
+      font-weight:bold;
+      color: white;
+    }
+
+    &.play-copy-2{
+      font-family: Montserrat-Regular, sans-serif;
+      font-size: 24px;
+      color: white;
+      margin-bottom: 0px;
+    }
+  }
+
+  #input-block{
+    margin-top: 55px;
+
+    #autocomplete{
+      width: 100%;
+      height: 40px;
+      background-color: transparent;
+      border: 2px solid white;
+
+      font-family: Montserrat-Regular, sans-serif;
+      font-size: 18px;
+      color: white;
+
+      &::-webkit-input-placeholder {
+        padding-left:20px;
+        color: white;
+      }
+
+      &:-moz-placeholder { /* Firefox 18- */
+        padding-left:20px;
+        color: white;
+      }
+
+      &::-moz-placeholder {  /* Firefox 19+ */
+        padding-left:20px;
+        color: white;
+      }
+
+      &:-ms-input-placeholder {
+        padding-left:20px;
+        color: white;
+      }
+    }
+
+    button{
+      display: inline;
+      border-color:#e7a901;
+      background-color: #e7a901;
+      font-family: Montserrat-SemiBold, sans-serif;
+      font-size: 18px;
+      color: white;
+    }
+  }
+
+
+
 }
