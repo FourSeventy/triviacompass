@@ -9,21 +9,32 @@
     <div ng-repeat="(day, bars) in bars">
 
         <div class ="day-entry" ng-if ="bars.length != 0">
+
+            <!-- Day Header -->
             <div class="row" >
                 <div class="twelve columns">
                     <h3 class="day-header">{{day | capitalize}}</h3>
                 </div>
             </div>
 
-            <div class="row bar-entry" ng-repeat= "bar in bars">
-                <div class="two columns offset-by-two time-field">
-                    <span>{{bar.trivia_time}}</span>
+            <!-- Bar line item -->
+            <div ng-init="limit = 5">
+                <div class="row bar-entry" ng-repeat= "bar in bars | limitTo: limit as results">
+                    <div class="two columns offset-by-two time-field">
+                        <span>{{bar.trivia_time}}</span>
+                    </div>
+                    <div class="four columns name-field">
+                        <span>{{bar.name}}</span>
+                    </div>
+                    <div class="four columns address-field">
+                        <span>{{ bar.address }}</span>
+                    </div>
                 </div>
-                <div class="four columns name-field">
-                    <span>{{bar.name}}</span>
-                </div>
-                <div class="four columns address-field">
-                    <span>{{ bar.address }}</span>
+
+                <div class="row">
+                    <a class = "two columns offset-by-five"
+                            ng-hide="results.length >= bars.length"
+                            ng-click="limit = 1000">Show All</a>
                 </div>
             </div>
 
