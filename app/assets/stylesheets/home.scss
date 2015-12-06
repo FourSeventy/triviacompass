@@ -26,7 +26,6 @@
     }
 
     h3{
-
       font-family: Montserrat-Regular, sans-serif;
       font-size: 24px;
       text-align: center;
@@ -40,7 +39,7 @@
     }
 
 
-    .day-entry{
+    .day-section{
       margin-bottom: 43px;
 
       a{
@@ -52,26 +51,37 @@
         text-align:center;
         text-decoration: underline;
       }
-    }
 
-    .bar-entry{
-      margin-bottom: 55px;
+      .bar-line-item{
+        margin-bottom: 30px;
 
-      .time-field{
-        text-align: center;
+        .time-field{
+          text-align: center;
+        }
+
+        .name-field{
+          text-align:center;
+        }
+
+        .address-field{
+          text-align: left;
+        }
       }
 
-      .name-field{
-        text-align:center;
+      .day-section-break{
+        border-bottom: 1px solid rgba(88,89,91,.5);
+
       }
 
-      .address-field{
-        text-align: left;
-      }
-    }
+      &:last-child{
+        margin-bottom: 120px;
+        
+        .day-section-break{
+          display:none;
+        }
 
-    .bar-line{
-      border-bottom: 1px solid rgba(88,89,91,.5);
+      }
+
     }
 
   }

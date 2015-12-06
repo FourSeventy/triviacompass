@@ -1,47 +1,51 @@
 <div class="container weekly-schedule">
 
-
     <div class="row">
         <h2>Weekly Schedule</h2>
         <div class="two columns offset-by-five header-line"></div>
     </div>
 
-    <div ng-repeat="(day, bars) in bars">
+    <div ng-repeat="(day, bars) in bars" ng-if ="bars.length != 0" class ="day-section">
 
-        <div class ="day-entry" ng-if ="bars.length != 0">
-
-            <!-- Day Header -->
-            <div class="row" >
-                <div class="twelve columns">
-                    <h3 class="day-header">{{day | capitalize}}</h3>
-                </div>
+        <!-- Day Header -->
+        <div class="row" >
+            <div class="twelve columns">
+                <h3 class="day-header">{{day | capitalize}}</h3>
             </div>
+        </div>
 
-            <!-- Bar line item -->
-            <div ng-init="limit = 5">
-                <div class="row bar-entry" ng-repeat= "bar in bars | limitTo: limit as results">
-                    <div class="two columns offset-by-two time-field">
-                        <span>{{bar.trivia_time}}</span>
-                    </div>
-                    <div class="four columns name-field">
-                        <span>{{bar.name}}</span>
-                    </div>
-                    <div class="four columns address-field">
-                        <span>{{ bar.address }}</span>
-                    </div>
+        <!-- Bar line item -->
+        <div ng-init="limit = 5">
+            <div class="row bar-line-item" ng-repeat= "bar in bars | limitTo: limit as results">
+                <div class="two columns offset-by-two time-field">
+                    <span>{{bar.trivia_time}}</span>
                 </div>
-
-                <div class="row">
-                    <a class = "two columns offset-by-five"
-                            ng-hide="results.length >= bars.length"
-                            ng-click="limit = 1000">Show All</a>
+                <div class="four columns name-field">
+                    <span>{{bar.name}}</span>
+                </div>
+                <div class="four columns address-field">
+                    <div class="row">
+                        <div class="twelve columns">
+                           <span>{{ bar.address }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="twelve columns">
+                            <span>{{ bar.city }}, {{bar.state}} {{bar.zip}}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="four columns offset-by-four bar-line"></div>
+                <a class = "two columns offset-by-five"
+                        ng-hide="results.length >= bars.length"
+                        ng-click="limit = 1000">Show All</a>
             </div>
         </div>
 
+        <div class="row">
+            <div class="four columns offset-by-four day-section-break"></div>
+        </div>
     </div>
 </div>
