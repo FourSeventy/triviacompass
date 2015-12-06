@@ -18,8 +18,12 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
 
 
+    $scope.findClick = function() {
 
-
+        $("#autocomplete").focus();
+        var e = $.Event("keypress", { which: 13, keyCode: 13 });
+        $("#autocomplete").trigger(e);
+    }
 
     $scope.refreshMap = function() {
 
@@ -82,7 +86,13 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
     var placeChanged = function() {
 
         //set new location data
-        var place = window.autocomplete.getPlace();
+        var place =  window.autocomplete.getPlaces()[0];
+
+        if (!place.geometry)
+        {
+            return;
+        }
+
         $scope.location.name = place.formatted_address;
         $scope.location.lat = place.geometry.location.lat();
         $scope.location.lng = place.geometry.location.lng();
@@ -135,8 +145,8 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
         });
 
         //init autocomplete search box
-        window.autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{types: ['geocode']});
-        window.autocomplete.addListener('place_changed', placeChanged);
+        window.autocomplete = new google.maps.places.SearchBox((document.getElementById('autocomplete')));
+        google.maps.event.addListener(window.autocomplete, 'places_changed', placeChanged);
 
         //refresh map
         $scope.refreshMap();
