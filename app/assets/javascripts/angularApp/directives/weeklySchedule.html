@@ -2,7 +2,7 @@
 
     <div class="row">
         <h2>Weekly Schedule</h2>
-        <div class="col-md-2 col-md-offset-5 header-line"></div>
+        <div class="col-xs-2 col-xs-offset-5 header-line"></div>
     </div>
 
     <div ng-repeat="(day, bars) in bars" ng-if ="bars.length != 0" class ="day-section">
@@ -17,13 +17,13 @@
         <!-- Bar line item -->
         <div ng-init="limit = 5">
             <div class="row bar-line-item" ng-repeat= "bar in bars | limitTo: limit as results">
-                <div class="col-md-2 col-md-offset-2 time-field">
+                <div class="col-md-2 col-md-offset-2 time-field col-sm-6">
                     <span>{{bar.trivia_time}}</span>
                 </div>
-                <div class="col-md-4 name-field">
+                <div class="col-md-4 name-field col-sm-6">
                     <span>{{bar.name}}</span>
                 </div>
-                <div class="col-md-4 address-field">
+                <div class="col-md-4 col-md-push-0 address-field col-sm-6 col-sm-push-6">
                     <div class="row">
                         <div class="col-md-12">
                            <span>{{ bar.address }}</span>

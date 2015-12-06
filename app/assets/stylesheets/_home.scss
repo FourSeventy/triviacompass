@@ -66,6 +66,11 @@
 
         .address-field{
           text-align: left;
+
+          @media(max-width: 991px){
+            text-align:center;
+            margin-top: 10px;
+          }
         }
       }
 

@@ -102,6 +102,13 @@
       border: 1px solid $color-orange;
       cursor: pointer;
       box-sizing: border-box;
+
+      width: 100%;
+
+      @media (max-width: 991px) {
+        margin-top: 20px;
+      }
+
     }
   }
 
