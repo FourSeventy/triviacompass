@@ -42,7 +42,8 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
                     position: {lat: parseFloat(bar.lat), lng: parseFloat(bar.long)},
                     map: window.map,
                     animation: google.maps.Animation.DROP,
-                    title: bar.name
+                    title: bar.name,
+                    icon: window.image_path('pin.png')
                 });
 
                 window.markerList.push(marker);
@@ -51,7 +52,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
                 //create info window
                 var infowindow = new google.maps.InfoWindow({
-                    content: '<div class="marker-window"> <p>'+bar.name+'</p> <p>'+bar.address+'</p> <p>'+bar.city + ", " + bar.state + " " + bar.zip+'</p></div>'
+                    content: '<div class="marker-window"> <p class="marker-name">'+bar.name+'</p> <p>'+bar.address+"</br>"+bar.city + ", " + bar.state + " " + bar.zip+'</p></div>'
                 });
 
                 window.infoWindowList.push(infowindow);

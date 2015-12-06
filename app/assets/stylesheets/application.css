@@ -10,8 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *  //css dependencies
  *= require normalize
  *= require skeleton
- *= require_tree .
- *= require_self
+
+    //sass
+ *= require main.scss
  */

@@ -17,11 +17,11 @@
       text-align: center;
       font-family: Montserrat-Bold, sans-serif;
       font-size: 36px;
-      color: #e7a901;
+      color: $color-orange;
     }
 
     .header-line{
-      border: 2px solid #e7a901;
+      border: 2px solid $color-orange;
       margin-bottom: 50px;
     }
 
@@ -43,7 +43,7 @@
       margin-bottom: 43px;
 
       a{
-        color: #e7a901;
+        color: $color-orange;
         font-family: Montserrat-Light, sans-serif;
         font-size: 15px;
         margin-bottom: 45px;
@@ -75,7 +75,7 @@
 
       &:last-child{
         margin-bottom: 120px;
-        
+
         .day-section-break{
           display:none;
         }
@@ -84,6 +84,15 @@
 
     }
 
+  }
+
+  .marker-window{
+
+    .marker-name{
+      font-family: Montserrat-Regular, sans-serif;
+      font-size: 18px;
+      color: $color-orange;
+    }
   }
 
 }
