@@ -2,35 +2,35 @@
 
     <div class="row">
         <h2>Weekly Schedule</h2>
-        <div class="two columns offset-by-five header-line"></div>
+        <div class="col-md-2 col-md-offset-5 header-line"></div>
     </div>
 
     <div ng-repeat="(day, bars) in bars" ng-if ="bars.length != 0" class ="day-section">
 
         <!-- Day Header -->
         <div class="row" >
-            <div class="twelve columns">
-                <h3 class="day-header">{{day | capitalize}}</h3>
+            <div class="col-md-12">
+                <h3>{{day | capitalize}}</h3>
             </div>
         </div>
 
         <!-- Bar line item -->
         <div ng-init="limit = 5">
             <div class="row bar-line-item" ng-repeat= "bar in bars | limitTo: limit as results">
-                <div class="two columns offset-by-two time-field">
+                <div class="col-md-2 col-md-offset-2 time-field">
                     <span>{{bar.trivia_time}}</span>
                 </div>
-                <div class="four columns name-field">
+                <div class="col-md-4 name-field">
                     <span>{{bar.name}}</span>
                 </div>
-                <div class="four columns address-field">
+                <div class="col-md-4 address-field">
                     <div class="row">
-                        <div class="twelve columns">
+                        <div class="col-md-12">
                            <span>{{ bar.address }}</span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="twelve columns">
+                        <div class="col-md-12">
                             <span>{{ bar.city }}, {{bar.state}} {{bar.zip}}</span>
                         </div>
                     </div>
@@ -38,14 +38,14 @@
             </div>
 
             <div class="row">
-                <a class = "two columns offset-by-five"
+                <a class="col-md-2 col-md-offset-5"
                         ng-hide="results.length >= bars.length"
                         ng-click="limit = 1000">Show All</a>
             </div>
         </div>
 
         <div class="row">
-            <div class="four columns offset-by-four day-section-break"></div>
+            <div class="col-md-4 col-md-offset-4 day-section-break"></div>
         </div>
     </div>
 </div>

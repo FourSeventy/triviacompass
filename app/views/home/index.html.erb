@@ -10,21 +10,21 @@
   <div id="search-header">
     <div class="container">
       <div class= "row">
-        <h1 class="twelve columns">Trivia Compass</h1>
+        <h1 class="col-md-12">Trivia Compass</h1>
       </div>
 
-      <div class="row" >
-        <div class="eight columns offset-by-two">
+      <div class="row trivia-copy">
+        <div class="col-md-8 col-md-offset-2">
           <p class="play-copy-1">Feel like playing some trivia?</p>
           <p class="play-copy-2">Enter your location below to find bar trivia closest to you.</p>
         </div>
       </div>
 
       <div class="row" id="input-block">
-        <div class="six columns offset-by-two">
+        <div class="col-md-6 col-md-offset-2">
           <input id="autocomplete" placeholder="Where are you?" type="text"/> <!-- onFocus="geolocate()" -->
         </div>
-        <div class="two columns">
+        <div class="col-md-2">
           <button ng-click="findClick()">Find a Bar</button>
         </div>
       </div>
@@ -34,14 +34,14 @@
 
   <div class="container">
     <div class= "row">
-        <h2 class="twelve columns">{{location.name}}</h2>
+        <h2 class="col-md-12">{{location.name}}</h2>
       </div>
     </div>
 
   <!-- map -->
   <div class="container">
     <div class="row">
-      <div class="twelve columns" id="map"></div>
+      <div class="col-md-12" id="map"></div>
     </div>
   </div>
 

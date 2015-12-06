@@ -116,6 +116,8 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
         });
 
+        $('#search-header').addClass('searched');
+
     }
 
     //init function that is called by the map api script after it is loaded

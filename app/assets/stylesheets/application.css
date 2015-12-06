@@ -12,7 +12,8 @@
  *
  *  //css dependencies
  *= require normalize
- *= require skeleton
+ *= require bootstrap.min
+ *= require bootstrap-theme.min
 
     //sass
  *= require main.scss
