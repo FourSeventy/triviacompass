@@ -58,6 +58,10 @@
 
         .time-field{
           text-align: center;
+
+          @media(max-width: 767px){
+            font-weight: bold;
+          }
         }
 
         .name-field{
