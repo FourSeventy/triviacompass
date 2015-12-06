@@ -52,7 +52,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
                 //create info window
                 var infowindow = new google.maps.InfoWindow({
-                    content: '<div class="marker-window"> <p class="marker-name">'+bar.name+'</p> <p>'+bar.address+"</br>"+bar.city + ", " + bar.state + " " + bar.zip+'</p></div>'
+                    content: '<div class="marker-window"> <p class="marker-name">'+bar.name+'</p> <p class="marker-address">'+bar.address+"</br>"+bar.city + ", " + bar.state + " " + bar.zip+'</p></div>'
                 });
 
                 window.infoWindowList.push(infowindow);
