@@ -150,6 +150,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
         window.autocomplete = new google.maps.places.SearchBox((document.getElementById('autocomplete')));
         google.maps.event.addListener(window.autocomplete, 'places_changed', placeChanged);
 
+
         //refresh map
         $scope.refreshMap();
 
