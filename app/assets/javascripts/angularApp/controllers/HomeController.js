@@ -117,6 +117,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
         });
 
         $('#search-header').addClass('searched');
+        $('#search-header button').html('Search Again');
 
     }
 
