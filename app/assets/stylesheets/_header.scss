@@ -1,15 +1,23 @@
 #search-header {
   height: 660px;
   margin-bottom: 45px;
-  background-image: image_url("header-image.jpg");
+  background-image:linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), image_url("header-image-web-2.jpg");
   background-position: center;
+  background-repeat: no-repeat, no-repeat;
+  background-color: black;
   position:relative;
 
-  transition: height 0.5s linear, background-image 0.5s linear;
+  transition: height 0.4s linear, background-image 0.5s linear;
+
+
 
   &.searched{
     height: 195px;
-    background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), image_url("header-image.jpg");
+    background-image:linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), image_url("header-image-web-2.jpg");
+    @media(max-width: 991px){
+      height: 245px;
+    }
+
     .trivia-copy{
       display:none;
      }
