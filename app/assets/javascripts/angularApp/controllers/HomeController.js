@@ -1,4 +1,4 @@
-app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
+app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope, $http, $cookies) {
 
     //bar by day list
     $scope.barList = {};
@@ -108,7 +108,12 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
             //ser new bar list
             $scope.barList = response.data;
 
+            //refresh the map with new bars
             $scope.refreshMap();
+
+            //drop a cookie to remember location
+            $cookies.put('location',JSON.stringify({name: $scope.location.name, lat: $scope.location.lat, lng: $scope.location.lng }));
+
 
         }, function errorCallback(response) {
 
@@ -118,6 +123,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
         $('#search-header').addClass('searched');
         $('#search-header button').html('Search Again');
+        $('#autocomplete').attr('placeholder','Looking for someplace else?');
 
     }
 

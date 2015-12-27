@@ -1,4 +1,4 @@
-var app = angular.module('TriviaApp',[]);
+var app = angular.module('TriviaApp',['ngCookies']);
 
 app.filter('capitalize', function() {
     return function(input) {

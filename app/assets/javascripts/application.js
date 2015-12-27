@@ -11,4 +11,5 @@
 // about supported directives.
 //=require jquery
 //=require angular
+//=require angular-cookies
 //= require_tree .

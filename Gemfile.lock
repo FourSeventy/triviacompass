@@ -100,6 +100,8 @@ GEM
       railties (= 4.2.4)
       sprockets-rails
     rails-assets-angular (1.4.7)
+    rails-assets-angular-cookies (1.4.7)
+      rails-assets-angular (= 1.4.7)
     rails-assets-jquery (2.1.4)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
@@ -170,6 +172,7 @@ DEPENDENCIES
   pg
   rails (= 4.2.4)
   rails-assets-angular!
+  rails-assets-angular-cookies!
   rails-assets-jquery (>= 2.1.4)!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
@@ -180,4 +183,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

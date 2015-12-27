@@ -46,5 +46,6 @@ end
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery', '>= 2.1.4'
   gem 'rails-assets-angular'
+  gem 'rails-assets-angular-cookies'
 end
 
