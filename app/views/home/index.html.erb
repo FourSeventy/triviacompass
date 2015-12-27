@@ -7,7 +7,7 @@
 
 
   <!-- location-->
-  <div id="search-header">
+  <div id="search-header" class=" <% concat 'searched' if @cookied %>">
     <div class="container">
       <div class= "row">
         <h1 class="col-md-12">Trivia Compass</h1>
@@ -22,10 +22,21 @@
 
       <div class="row" id="input-block">
         <div class="col-md-6 col-md-offset-1 col-lg-6 col-lg-offset-2">
-          <input id="autocomplete" placeholder="Where are you?" type="text"/> <!-- onFocus="geolocate()" -->
+          <%if @cookied%>
+          <% placeholder = 'Looking for someplace else?'%>
+          <% else %>
+           <% placeholder = 'Where are you?' %>
+          <% end %>
+          <input id="autocomplete" placeholder="<%=placeholder %>" type="text"/> <!-- onFocus="geolocate()" -->
         </div>
         <div class="col-sm-12 col-md-4 col-lg-2">
-          <button ng-click="findClick()">Find a Bar</button>
+          <button ng-click="findClick()">
+            <%if @cookied %>
+             Search Again
+            <% else %>
+             Find a Bar
+            <% end %>
+           </button>
         </div>
       </div>
 

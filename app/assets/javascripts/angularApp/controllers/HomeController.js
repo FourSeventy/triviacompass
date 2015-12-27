@@ -6,6 +6,9 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
     //location
     $scope.location = {}; //{name: foo, lat: bar, lng: baz}
 
+    //options
+    $scope.options = {};
+
     //map reference
     window.map = null;
 
@@ -96,7 +99,7 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
         $scope.location.name = place.formatted_address;
         $scope.location.lat = place.geometry.location.lat();
         $scope.location.lng = place.geometry.location.lng();
-        var radius = 30;
+        var radius = $scope.options.radius;
 
         //make http call to bar endpoint
         $http({
@@ -140,6 +143,7 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
         var default_data = $('#default-data').data('preloaded');
         $scope.barList = default_data.bars;
         $scope.location = default_data.location;
+        $scope.options = default_data.options;
 
 
         // Create a map object and specify the DOM element for display.
