@@ -1,7 +1,5 @@
 class AdminController < ApplicationController
 
-  include AdminHelper
-
   http_basic_authenticate_with :name => 'admin', :password => 'triviaCompassAdmin'
 
   #GET admin
@@ -149,7 +147,8 @@ class AdminController < ApplicationController
   #POST admin/scrape
   def run_scrape
 
-    result = AdminHelper.scrape_geeks
+    scraper_service = BarScraperService.new
+    result = scraper_service.scrape_geeks
 
     render :json => {result: result}
 
