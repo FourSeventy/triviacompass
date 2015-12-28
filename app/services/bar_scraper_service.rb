@@ -33,6 +33,11 @@ class BarScraperService
       bar.state = city_state_zip[-2]
       bar.zip = city_state_zip[-1]
 
+      #fix zip edge case where leading 0 gets cut off
+      if bar.zip.length < 5
+        bar.zip.prepend '0'
+      end
+
       #find previous h1 for the day
       bar.trivia_day = result.at_xpath('(preceding-sibling::h1 | preceding-sibling::*//h1)[last()]').text
 
