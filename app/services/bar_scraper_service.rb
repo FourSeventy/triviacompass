@@ -43,10 +43,17 @@ class BarScraperService
 
       #find time
       span =  result.at_xpath('following-sibling::span')
-      bar.trivia_time = span.at_xpath('following-sibling::text()').text
+      trivia_time_node = span.at_xpath('following-sibling::text()')
+      bar.trivia_time = trivia_time_node.text
 
-      #add bar to array
-      bar_array.push bar
+      #check if bar is an upcoming bar
+      b = trivia_time_node.next
+      upcoming = !b.nil? && b.name == 'b' && b.text.include?('Starts')
+
+      #add bar to array as long as its not upcoming
+      unless upcoming
+        bar_array.push bar
+      end
     end
 
 
