@@ -147,8 +147,12 @@ class AdminController < ApplicationController
   #POST admin/scrape
   def run_scrape
 
+    #build scraper service
     scraper_service = BarScraperService.new
-    result = scraper_service.scrape_geeks
+
+
+    #result = scraper_service.scrape_geeks
+    result = scraper_service.scrape_stump
 
     render :json => {result: result}
 
