@@ -29,9 +29,6 @@
   <!-- html5 shiv -->
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  <!-- application javascript -->
-  <%= javascript_include_tag 'application' %>
-
   <!-- application css -->
   <%= stylesheet_link_tag    'application', media: 'all'%>
 
@@ -58,8 +55,10 @@
 <%= render 'layouts/footer' %>
 
 <!-- google maps -->
-<script async defer src= <%= "https://maps.googleapis.com/maps/api/js?key=#{Rails.configuration.google_maps_api_key}&callback=window.initMap&libraries=places"%>></script>
+<script src= <%= "https://maps.googleapis.com/maps/api/js?key=#{Rails.configuration.google_maps_api_key}&libraries=places"%>></script>
 
+<!-- application javascript -->
+<%= javascript_include_tag 'application' %>
 
 </body>
 </html>

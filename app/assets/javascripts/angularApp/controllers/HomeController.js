@@ -19,14 +19,12 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
     //autocomplete box reference
     window.autoComplete = null;
 
-
-
     $scope.findClick = function() {
 
         $("#autocomplete").focus();
         var e = $.Event("keypress", { which: 13, keyCode: 13 });
         $("#autocomplete").trigger(e);
-    }
+    };
 
     $scope.refreshMap = function() {
 
@@ -83,7 +81,7 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
         //pan map
         var center = new google.maps.LatLng($scope.location.lat, $scope.location.lng);
         window.map.panTo(center);
-    }
+    };
 
 
     var placeChanged = function() {
@@ -128,10 +126,10 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
         $('#search-header button').html('Search Again');
         $('#autocomplete').attr('placeholder','Looking for someplace else?');
 
-    }
+    };
 
-    //init function that is called by the map api script after it is loaded
-    window.initMap = function() {
+
+    (function init() {
 
         //if there is no map div on this page, return
         if(!$('#map').length)
@@ -165,6 +163,7 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
         //refresh map
         $scope.refreshMap();
 
-    }
+    })();
+
 
 }]);
