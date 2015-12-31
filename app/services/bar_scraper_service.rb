@@ -93,7 +93,7 @@ class BarScraperService
     day_list = response['DayList']['DayEvents']
 
     #iterate over days
-    day_map = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+    day_map = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
     day_list.each_with_index do |item, index|
 
       #get day of trivia
