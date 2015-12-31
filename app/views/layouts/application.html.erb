@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Trivia Compass</title>
 
   <!-- meta -->
+  <meta http-equiv="x-ua-compatible" content="IE=edge" >
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=9,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO -->
@@ -21,13 +20,20 @@
   <meta property="og:description" content="Trivia Compass">
   <meta property="og:site_name" content="Trivia Compass">
 
-  <!-- /meta -->
+  <!-- title -->
+  <title>Trivia Compass</title>
 
   <!-- favicon -->
   <link rel="shortcut icon" href="/assets/img/favicon.png">
 
   <!-- html5 shiv -->
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <!-- google maps -->
+  <script src= <%= "https://maps.googleapis.com/maps/api/js?key=#{Rails.configuration.google_maps_api_key}&libraries=places"%>></script>
+
+  <!-- application javascript -->
+  <%= javascript_include_tag 'application' %>
 
   <!-- application css -->
   <%= stylesheet_link_tag    'application', media: 'all'%>
@@ -53,12 +59,6 @@
 
 <!-- footer -->
 <%= render 'layouts/footer' %>
-
-<!-- google maps -->
-<script src= <%= "https://maps.googleapis.com/maps/api/js?key=#{Rails.configuration.google_maps_api_key}&libraries=places"%>></script>
-
-<!-- application javascript -->
-<%= javascript_include_tag 'application' %>
 
 </body>
 </html>

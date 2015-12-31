@@ -11,7 +11,7 @@ class Bar < ActiveRecord::Base
   validates :state, presence: true
   validates :zip, presence: true
   validates_format_of :zip, with: /\A\d{5}(-\d{4})?\z/, message: "should be in the form 12345 or 12345-1234"
-  validates :phone, numericality: {only_integer: true}, :allow_nil => true
+  #validates :phone, numericality: {only_integer: true}, :allow_nil => true
   #validates_format_of :phone, with: /\d{10}/, message: "must be ten digits"
   validates :trivia_day, presence: true
   validates :trivia_time, presence: true
@@ -75,7 +75,7 @@ class Bar < ActiveRecord::Base
     #sort each day by time
     day_hash.each do |day, bars|
       bars.sort! do |a, b|
-        a.trivia_time <=> b.trivia_time
+        Time.parse(a.trivia_time) <=> Time.parse(b.trivia_time)
       end
     end
 
