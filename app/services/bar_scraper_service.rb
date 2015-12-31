@@ -47,6 +47,9 @@ class BarScraperService
       trivia_time_node = span.at_xpath('following-sibling::text()')
       bar.trivia_time = trivia_time_node.text
 
+      #set trivia type
+      bar.trivia_type = 'geeks'
+
       #check if bar is an upcoming bar
       b = trivia_time_node.next
       upcoming = !b.nil? && b.name == 'b' && b.text.include?('Starts')
@@ -63,13 +66,7 @@ class BarScraperService
       bar.populateLocation
     end
 
-    #save all bars to the db
-    bar_array.each do |bar|
-      bar.save
-
-      Rails.logger.error bar.errors.messages
-    end
-
+    #return array of bars
     return bar_array
 
   end
@@ -119,6 +116,7 @@ class BarScraperService
           bar.city = address['City']['Name']
           bar.state = address['State']['Name']
           bar.zip = address['ZipCode']['ZipCodeValue']
+          bar.trivia_type = 'stump'
 
           #push bar to list
           bar_list.push bar
@@ -127,13 +125,7 @@ class BarScraperService
 
     end
 
-    #save all bars to the db
-    bar_list.each do |bar|
-      bar.save
-
-      Rails.logger.error bar.errors.messages
-    end
-    
+    #return bar list
     return bar_list
 
   end

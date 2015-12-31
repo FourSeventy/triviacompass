@@ -144,18 +144,51 @@ class AdminController < ApplicationController
 
   end
 
-  #POST admin/scrape
-  def run_scrape
+  #POST admin/scrapeGeeks
+  def scrape_geeks
 
     #build scraper service
     scraper_service = BarScraperService.new
 
+    #scrape bars
+    result = scraper_service.scrape_geeks
 
-    #result = scraper_service.scrape_geeks
-    result = scraper_service.scrape_stump
+    #todo: check for scrape errors
+    Bar.transaction do
+      Bar.where(trivia_type: 'geeks').delete_all
 
+      #save all bars to the db
+      result.each do |bar|
+        bar.save
+      end
+    end
+
+    #return json of bars
     render :json => {result: result}
 
+  end
+
+  #POST admin/scrapeStump
+  def scrape_stump
+
+    #build scraper service
+    scraper_service = BarScraperService.new
+
+    #scrape bars
+    result = scraper_service.scrape_stump
+
+    #todo: check for scrape errors
+    Bar.transaction do
+      Bar.where(trivia_type: 'stump').delete_all
+
+      #save all bars to the db
+      result.each do |bar|
+        bar.save
+      end
+    end
+
+    #return json of bars
+    render :json => {result: result}
 
   end
 

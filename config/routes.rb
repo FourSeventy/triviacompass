@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   post 'admin/editBar' => 'admin#updateBar'
   post 'admin/deleteBar' => 'admin#deleteBar'
   get 'admin/scrape' => 'admin#scrape'
-  post 'admin/scrape' => 'admin#run_scrape'
+  post 'admin/scrapeGeeks' => 'admin#scrape_geeks'
+  post 'admin/scrapeStump' => 'admin#scrape_stump'
 
 
   #rating api

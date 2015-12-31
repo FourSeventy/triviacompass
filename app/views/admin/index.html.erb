@@ -31,6 +31,7 @@
         <th>Rating</th>
         <th>Lat</th>
         <th>Long</th>
+        <th>Type</th>
         <th>Edit</th>
 
       </tr>
@@ -74,6 +75,9 @@
               </td>
               <td>
                 <%= bar.long %>
+              </td>
+              <td>
+                <%= bar.trivia_type %>
               </td>
               <td>
                 <a href = <%= "/admin/editBar/#{bar.id}"%>> Edit </a>

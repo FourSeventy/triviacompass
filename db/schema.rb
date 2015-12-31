@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20151014022617) do
     t.string   "trivia_day"
     t.string   "lat"
     t.string   "long"
+    t.string   "trivia_type"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

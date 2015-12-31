@@ -1,8 +1,9 @@
 $( document ).ready(function() {
 
-    $('#scrape').click(function(){
 
-        $.ajax({ url: '/admin/scrape',
+    function sendRequest(url){
+
+        $.ajax({ url: url,
             type: 'POST',
             beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
 
@@ -13,7 +14,20 @@ $( document ).ready(function() {
         }).fail(function(data){
             console.log("fail");
         });
+    }
 
+
+    $('#scrape-geeks').click(function(){
+
+        sendRequest('/admin/scrapeGeeks');
 
     })
+
+    $('#scrape-stump').click(function(){
+
+        sendRequest('/admin/scrapeStump');
+
+    })
+
+
 });
