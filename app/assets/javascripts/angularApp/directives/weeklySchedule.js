@@ -1,9 +1,7 @@
 app.directive('weeklySchedule', function() {
     return {
         restrict: 'E',
-        scope: {
-            bars: '='
-        },
+        scope: false,
         templateUrl: 'assets/angularApp/directives/weeklySchedule.html'
     };
 });

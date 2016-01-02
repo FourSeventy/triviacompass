@@ -1,11 +1,25 @@
 <div class="container weekly-schedule">
 
     <div class="row">
-        <h2>Weekly Schedule</h2>
+
+        <h2 class="col-md-4 col-md-offset-4">Weekly Schedule</h2>
+        <div class="col-md-2">
+            <select class="form-control" ng-model="day" ng-change="dayChanged()">
+                <option selected value="all">All</option>
+                <option value="sunday">Sunday</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+            </select>
+        </div>
         <div class="col-xs-2 col-xs-offset-5 header-line"></div>
     </div>
 
-    <div ng-repeat="(day, bars) in bars" ng-if ="bars.length != 0" class ="day-section">
+
+    <div ng-repeat="(day, bars) in barList" ng-if ="bars.length != 0" class ="day-section">
 
         <!-- Day Header -->
         <div class="row" >

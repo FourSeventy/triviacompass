@@ -9,6 +9,9 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
     //options
     $scope.options = {};
 
+    //day of week to filter on
+    $scope.day = 'all';
+
     //map reference
     window.map = null;
 
@@ -83,6 +86,26 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
         window.map.panTo(center);
     };
 
+    $scope.dayChanged = function() {
+
+        //refresh default bar and location data from page
+        var defaultData = $('#default-data').data('preloaded');
+        var newBarList = defaultData.bars;
+
+        if($scope.day == 'all') {
+            $scope.barList = newBarList;
+            $scope.refreshMap();
+            return;
+        }
+
+        //build filtered list
+        $scope.barList = {};
+        $scope.barList[$scope.day] = newBarList[$scope.day];
+
+        //reflow map
+        $scope.refreshMap();
+
+    };
 
     var placeChanged = function() {
 

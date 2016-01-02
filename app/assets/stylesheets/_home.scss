@@ -11,8 +11,13 @@
     }
 
   .weekly-schedule {
+    padding-top: 80px;
+
+    select{
+      margin-top: 15px;
+    }
+
     h2{
-      margin-top: 80px;
       margin-bottom: 15px;
       text-align: center;
       font-family: Montserrat-Bold, sans-serif;
