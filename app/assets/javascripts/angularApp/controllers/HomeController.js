@@ -57,7 +57,7 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
 
                 //create info window
                 var infowindow = new google.maps.InfoWindow({
-                    content: '<div class="marker-window"> <p class="marker-name">'+bar.name+'</p> <p class="marker-address">'+bar.address+"</br>"+bar.city + ", " + bar.state + " " + bar.zip+'</p></div>'
+                    content: '<div class="marker-window"> <p class="marker-name">'+bar.name+'</p> <p class="marker-address">'+bar.address+"</br>"+bar.city + ", " + bar.state + " " + bar.zip+"</p><p class='marker-address'>"+bar.trivia_day +", "+bar.trivia_time+"</p></div>"
                 });
 
                 window.infoWindowList.push(infowindow);
