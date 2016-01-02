@@ -22,12 +22,10 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
     //autocomplete box reference
     window.autoComplete = null;
 
-    $scope.findClick = function() {
 
-        $("#autocomplete").focus();
-        var e = $.Event("keypress", { which: 13, keyCode: 13 });
-        $("#autocomplete").trigger(e);
-    };
+
+
+
 
     $scope.refreshMap = function() {
 
@@ -86,47 +84,19 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
         window.map.panTo(center);
     };
 
-    $scope.dayChanged = function() {
 
-        //refresh default bar and location data from page
-        var defaultData = $('#default-data').data('preloaded');
-        var newBarList = defaultData.bars;
+    var getBarListAndRefresh = function(name, lat, lng) {
 
-        if($scope.day == 'all') {
-            $scope.barList = newBarList;
-            $scope.refreshMap();
-            return;
-        }
-
-        //build filtered list
-        $scope.barList = {};
-        $scope.barList[$scope.day] = newBarList[$scope.day];
-
-        //reflow map
-        $scope.refreshMap();
-
-    };
-
-    var placeChanged = function() {
-
-        //set new location data
-        var place =  window.autocomplete.getPlaces()[0];
-
-        if (!place.geometry)
-        {
-            return;
-        }
-
-        $scope.location.name = place.formatted_address;
-        $scope.location.lat = place.geometry.location.lat();
-        $scope.location.lng = place.geometry.location.lng();
-        var radius = $scope.options.radius;
+        //set our scope location data
+        $scope.location.name = name;
+        $scope.location.lat = lat;
+        $scope.location.lng = lng;
 
         //make http call to bar endpoint
         $http({
             method: 'GET',
             url: '/bars',
-            params: {lat: $scope.location.lat, long: $scope.location.lng, radius: radius}
+            params: {lat: $scope.location.lat, long: $scope.location.lng, radius: $scope.options.radius}
         }).then(function successCallback(response) {
 
             //ser new bar list
@@ -149,7 +119,75 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
         $('#search-header button').html('Search Again');
         $('#autocomplete').attr('placeholder','Looking for someplace else?');
 
+    }
+
+
+    //listener for place autocomplete box change
+    var placeChanged = function() {
+
+        //set new location data
+        var place =  window.autocomplete.getPlaces()[0];
+
+        if (!place.geometry) {
+            return;
+        }
+
+        var name = place.formatted_address;
+        var lat = place.geometry.location.lat();
+        var lng = place.geometry.location.lng();
+
+        getBarListAndRefresh(name,lat,lng);
+
     };
+
+    //listener for find button
+    $scope.findButtonClick = function() {
+
+        // get autocomplete text
+        var location = $('#autocomplete').val();
+
+        //geocode location
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode( { 'address': location}, function(results, status) {
+
+            //if status is bad or results.size is 0 dont do anything
+            if (status != google.maps.GeocoderStatus.OK || results.length == 0) {
+                return;
+            }
+
+            //pull out data we need
+            var address = results[0].formatted_address;
+            var lat = results[0].geometry.location.lat();
+            var lng = results[0].geometry.location.lng();
+
+            getBarListAndRefresh(address,lat,lng);
+
+        });
+    };
+
+    //listener for day select button change
+    $scope.dayChanged = function() {
+
+        //refresh default bar and location data from page
+        var defaultData = $('#default-data').data('preloaded');
+        var newBarList = defaultData.bars;
+
+        if($scope.day == 'all') {
+            $scope.barList = newBarList;
+            $scope.refreshMap();
+            return;
+        }
+
+        //build filtered list
+        $scope.barList = {};
+        $scope.barList[$scope.day] = newBarList[$scope.day];
+
+        //reflow map
+        $scope.refreshMap();
+
+    };
+
+
 
 
     (function init() {
