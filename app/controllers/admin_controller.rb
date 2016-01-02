@@ -106,7 +106,7 @@ class AdminController < ApplicationController
       bar.populateLocation
     rescue
 
-      logger.error "Error populating bar location for #{name} #{address}"
+      Rails.logger.error "Error populating bar location for #{name} #{address}"
 
     end
 

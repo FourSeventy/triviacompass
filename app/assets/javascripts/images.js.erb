@@ -5,8 +5,22 @@ Dir.chdir("#{Rails.root}/app/assets/images/") do
     |h,f| h.merge! f => image_path(f)
   end
 end
+
+templates = {'weeklySchedule.html': asset_path('angularApp/templates/weeklySchedule.html')}
+# Dir.chdir("#{Rails.root}/app/assets/javascripts/angularApp/templates/") do
+#   templates = Dir["**"].inject({}) do |h,f|
+#     h.merge! f => asset_path(f)
+#     Rails.logger.error(asset_path(f))
+#   end
+# end
 %>
 
+
+
 window.image_path = function(name) {
-           return <%= imgs.to_json %>[name];
+    return  <%= imgs.to_json %>[name];
+};
+
+window.template_path = function(name) {
+    return  <%= templates.to_json %>[name];
 };
