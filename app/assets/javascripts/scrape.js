@@ -18,16 +18,17 @@ $( document ).ready(function() {
 
 
     $('#scrape-geeks').click(function(){
-
         sendRequest('/admin/scrapeGeeks');
-
-    })
+    });
 
     $('#scrape-stump').click(function(){
 
         sendRequest('/admin/scrapeStump');
+    });
 
-    })
+    $('#scrape-brain').click(function(){
+        sendRequest('/admin/scrapeBrain');
+    });
 
 
 });

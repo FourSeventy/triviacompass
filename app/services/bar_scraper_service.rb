@@ -10,7 +10,7 @@ class BarScraperService
   ## Scrape the Geeks Who Drink bar listing page for bar data
   def scrape_geeks
 
-    #make get reqest to geeks page
+    #make get request to geeks page
     mechanize = Mechanize.new
     page = mechanize.get('http://www.geekswhodrink.com/pages/venues?action=getAll')
 
@@ -117,6 +117,7 @@ class BarScraperService
           bar.state = address['State']['Name']
           bar.zip = address['ZipCode']['ZipCodeValue']
           bar.trivia_type = 'stump'
+          #TODO: parse phone number
 
           #push bar to list
           bar_list.push bar
@@ -127,6 +128,72 @@ class BarScraperService
 
     #return bar list
     return bar_list
+
+  end
+
+  def scrape_brain
+
+    #make get request to geeks page
+    mechanize = Mechanize.new
+    page = mechanize.get('http://www.brainstormer.com/venuelist.aspx')
+
+    #initialize array to hold our list of bars
+    bar_array = []
+
+    #get all bar anchors
+    links = page.links_with(text: 'Quiz Info')
+
+    #follow each link and scrape bar data
+    links.each do |link|
+
+      begin
+        bar = Bar.new
+        page = mechanize.get(link.href)
+
+        #get name
+        name = page.at('h1').content
+        bar.name = name
+
+        #get day and time
+        day_time = page.at('#ctl00_MainContent_lblQuizDayTime').content
+        day = day_time.split(',')[0]
+        time = day_time.split(',')[1].gsub('.','').gsub(' ','')
+        bar.trivia_day = day
+        bar.trivia_time = time
+
+        #get  address
+        address_block_string = page.at('.row').at('.cols2').content
+        address_array = address_block_string.gsub("\t", '').gsub("\r",'').split("\n")
+
+        address = address_array[2]
+        city_state_zip = address_array[3]
+        city = city_state_zip.split(',')[0]
+
+        state_zip = city_state_zip.split(',')[1]
+        state = state_zip.split(' ')[0]
+        zip = state_zip.split(' ')[1]
+
+        bar.city = city
+        bar.state = state
+        bar.zip = zip
+        bar.address = address
+
+        bar.trivia_type = 'brain'
+        bar_array.push bar
+
+      rescue
+        Rails.logger.error 'Failed to parse a brain bar'
+        next
+      end
+    end
+
+    #populate bar lat and long, rate limited to 10 per second
+    make_multiple_requests(bar_array) do |bar|
+      bar.populateLocation
+    end
+
+    #return bar array
+    return bar_array
 
   end
 
