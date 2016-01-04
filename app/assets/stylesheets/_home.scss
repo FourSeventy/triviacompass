@@ -13,6 +13,10 @@
   .weekly-schedule {
     padding-top: 80px;
 
+    .schedule-header{
+      padding-bottom:50px;
+    }
+
     select{
       margin-top: 15px;
     }
@@ -27,7 +31,6 @@
 
     .header-line{
       border: 2px solid $color-orange;
-      margin-bottom: 50px;
     }
 
     h3{
