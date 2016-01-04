@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-0">
-            <select class="form-control" ng-model="day" ng-change="dayChanged()">
+            <select class="form-control" ng-model="dayFilter" ng-change="refreshMap()">
                 <option selected value="all">All</option>
                 <option value="sunday">Sunday</option>
                 <option value="monday">Monday</option>
@@ -23,7 +23,7 @@
 
 
 
-    <div ng-repeat="(day, bars) in barList" ng-if ="bars.length != 0" class ="day-section">
+    <div ng-repeat="(day, bars) in barList" ng-if ="bars.length != 0 && (dayFilter == 'all' || dayFilter == day)" class ="day-section">
 
         <!-- Day Header -->
         <div class="row" >

@@ -10,7 +10,7 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
     $scope.options = {};
 
     //day of week to filter on
-    $scope.day = 'all';
+    $scope.dayFilter = 'all';
 
     //map reference
     window.map = null;
@@ -21,8 +21,6 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
 
     //autocomplete box reference
     window.autoComplete = null;
-
-
 
 
 
@@ -41,6 +39,11 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
 
         //create marker for each bar
         $.each($scope.barList, function(day, bars){
+
+            if($scope.dayFilter != 'all' && $scope.dayFilter != day){
+                return true; //continue to next bar
+            }
+
             $.each(bars, function(index, bar){
 
                 //create marker
@@ -87,6 +90,9 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
 
     var getBarListAndRefresh = function(name, lat, lng) {
 
+        //set day filter back to all
+        $scope.dayFilter = 'all'
+        
         //set our scope location data
         $scope.location.name = name;
         $scope.location.lat = lat;
@@ -164,29 +170,6 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
 
         });
     };
-
-    //listener for day select button change
-    $scope.dayChanged = function() {
-
-        //refresh default bar and location data from page
-        var defaultData = $('#default-data').data('preloaded');
-        var newBarList = defaultData.bars;
-
-        if($scope.day == 'all') {
-            $scope.barList = newBarList;
-            $scope.refreshMap();
-            return;
-        }
-
-        //build filtered list
-        $scope.barList = {};
-        $scope.barList[$scope.day] = newBarList[$scope.day];
-
-        //reflow map
-        $scope.refreshMap();
-
-    };
-
 
 
 
