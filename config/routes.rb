@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post 'admin/scrapeGeeks' => 'admin#scrape_geeks'
   post 'admin/scrapeStump' => 'admin#scrape_stump'
   post 'admin/scrapeBrain' => 'admin#scrape_brain'
+  post 'admin/scrapeSporcle' => 'admin#scrape_sporcle'
 
 
   #rating api

@@ -30,5 +30,9 @@ $( document ).ready(function() {
         sendRequest('/admin/scrapeBrain');
     });
 
+    $('#scrape-sporcle').click(function(){
+        sendRequest('/admin/scrapeSporcle');
+    });
+
 
 });

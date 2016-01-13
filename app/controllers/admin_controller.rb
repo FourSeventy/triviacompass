@@ -159,6 +159,10 @@ class AdminController < ApplicationController
     run_scraper 'brain'
   end
 
+  def scrape_sporcle
+    run_scraper 'sporcle'
+  end
+
 
   #helper method that does all the logic for running a scraper
   def run_scraper(id)
