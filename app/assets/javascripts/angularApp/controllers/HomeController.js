@@ -142,6 +142,13 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
         var lat = place.geometry.location.lat();
         var lng = place.geometry.location.lng();
 
+        try {
+            ga('send', 'event', "search", "autocomplete", name);
+        }
+        catch(e) {
+            console.log("GA tracking error");
+        }
+
         getBarListAndRefresh(name,lat,lng);
 
     };
@@ -165,6 +172,13 @@ app.controller('HomeController', ['$scope', '$http', '$cookies', function($scope
             var address = results[0].formatted_address;
             var lat = results[0].geometry.location.lat();
             var lng = results[0].geometry.location.lng();
+
+            try {
+                ga('send', 'event', "search", "findButton", address);
+            }
+            catch(e) {
+                console.log("GA tracking error");
+            }
 
             getBarListAndRefresh(address,lat,lng);
 
