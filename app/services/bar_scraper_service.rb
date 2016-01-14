@@ -274,9 +274,9 @@ class BarScraperService
     end
 
     #populate lat and lng
-    # make_multiple_requests(bar_array) do |bar|
-    #   bar.populateLocation
-    # end
+    make_multiple_requests(bar_array) do |bar|
+      bar.populateLocation
+    end
     
     #return
     return bar_array
