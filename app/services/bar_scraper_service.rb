@@ -236,41 +236,47 @@ class BarScraperService
 
           bar_page = mechanize.get(bar_link.attribute('href'))
 
-          #build up bar
-          bar = Bar.new
 
-          name = bar_page.at('#venue-text h1').content
-          address = bar_page.at('#address-line-1').content
 
-          city_state_zip = bar_page.at('#address-line-2').content
-          city = city_state_zip.split(',')[0]
-          state_zip =city_state_zip.split(',')[1]
-          state = state_zip.split(' ')[0]
-          zip = state_zip.split(' ')[1]
+          full_day_time = bar_page.at('#venue-show-times').content
+          day_time_split_by_pipe = full_day_time.split('|')
 
-          day_time = bar_page.at('#venue-show-times').content
-          day = day_time.split(',')[0].gsub("\t", '').gsub("\r",'').gsub("\n",'')
-          day = day[0..-2] #chop off last character
-          time = day_time.split(',')[1].gsub("\t", '').gsub("\r",'').gsub("\n",'')
+          #iterate over multiple days and times making an entry for each
+          day_time_split_by_pipe.each do |day_time|
+            bar = Bar.new
+            day = day_time.split(',')[0].gsub("\t", '').gsub("\r",'').gsub("\n",'')
+            day = day[0..-2] #chop off last character
+            time = day_time.split(',')[1].gsub("\t", '').gsub("\r",'').gsub("\n",'')
 
-          bar.name = name
-          bar.address = address
-          bar.city = city
-          bar.state = state
-          bar.zip = zip
-          bar.trivia_day = day
-          bar.trivia_time = time
+            name = bar_page.at('#venue-text h1').content
+            address = bar_page.at('#address-line-1').content
 
-          bar_array.push(bar)
+            city_state_zip = bar_page.at('#address-line-2').content
+            city = city_state_zip.split(',')[0]
+            state_zip =city_state_zip.split(',')[1]
+            state = state_zip.split(' ')[0]
+            zip = state_zip.split(' ')[1]
+
+            bar.name = name
+            bar.address = address
+            bar.city = city
+            bar.state = state
+            bar.zip = zip
+            bar.trivia_day = day
+            bar.trivia_time = time
+            bar.trivia_type = 'sporcle'
+
+            bar_array.push(bar)
+          end
 
         end
       end
     end
 
     #populate lat and lng
-    make_multiple_requests(bar_array) do |bar|
-      bar.populateLocation
-    end
+    # make_multiple_requests(bar_array) do |bar|
+    #   bar.populateLocation
+    # end
     
     #return
     return bar_array
