@@ -2,8 +2,8 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   #google api keys
-  config.google.maps_key = "AIzaSyAZYjM6x04RwLCPU8wiqUpDPebCHyXEmDQ"
-  config.google.analytics_key = "UA-xxxxxxxx-x"
+  config.google_maps_key = "AIzaSyAZYjM6x04RwLCPU8wiqUpDPebCHyXEmDQ"
+  config.google_analytics_key = "UA-xxxxxxxx-x"
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

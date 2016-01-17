@@ -2,7 +2,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   #google api keys
-  config.google.maps_key = "AIzaSyAZYjM6x04RwLCPU8wiqUpDPebCHyXEmDQ"
+  config.google_maps_key = "AIzaSyAZYjM6x04RwLCPU8wiqUpDPebCHyXEmDQ"
   config.google_analytics_key = "UA-71916477-1"
 
   # Code is not reloaded between requests.
