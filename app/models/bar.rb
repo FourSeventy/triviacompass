@@ -88,7 +88,7 @@ class Bar < ActiveRecord::Base
 
     #define parts of request
     endpoint ='https://maps.googleapis.com/maps/api/geocode/json'
-    key = Rails.configuration.google_maps_api_key
+    key = Rails.configuration.google.maps_key
     address_param= CGI.escape("#{self.address} #{self.city} #{self.state} #{self.zip}")
 
     #send HTTP request

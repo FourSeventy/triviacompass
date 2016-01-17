@@ -1,6 +1,10 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  #google api keys
+  config.google.maps_key = "AIzaSyAZYjM6x04RwLCPU8wiqUpDPebCHyXEmDQ"
+  config.google_analytics_key = "UA-71916477-1"
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -77,6 +81,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  #google maps api key
-  config.google_maps_api_key = "AIzaSyAZYjM6x04RwLCPU8wiqUpDPebCHyXEmDQ"
+
 end
