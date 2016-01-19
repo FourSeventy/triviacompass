@@ -163,6 +163,10 @@ class AdminController < ApplicationController
     run_scraper 'sporcle'
   end
 
+  def scrape_trivianation
+    run_scraper 'trivianation'
+  end
+
 
   #helper method that does all the logic for running a scraper
   def run_scraper(id)

@@ -34,5 +34,8 @@ $( document ).ready(function() {
         sendRequest('/admin/scrapeSporcle');
     });
 
+    $('#scrape-trivianation').click(function(){
+        sendRequest('/admin/scrapetrivianation');
+    });
 
 });

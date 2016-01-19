@@ -236,8 +236,6 @@ class BarScraperService
 
           bar_page = mechanize.get(bar_link.attribute('href'))
 
-
-
           full_day_time = bar_page.at('#venue-show-times').content
           day_time_split_by_pipe = full_day_time.split('|')
 
@@ -280,7 +278,70 @@ class BarScraperService
     
     #return
     return bar_array
+  end
 
+  def scrape_trivianation
+
+    #get page
+    url = 'http://www.trivianation.com/wp-admin/admin-ajax.php'
+    body = {'address' => '', 'game_type' => 1, 'action' =>'findashow'}
+    mechanize = Mechanize.new
+    page = mechanize.post(url, body)
+
+    #initialize array to hold our list of bars
+    bar_array = []
+
+    #get all the bar entries
+    bar_entries = page.search('li.location')
+
+    bar_entries.each do |bar_block|
+
+      name = bar_block.at('span.strong').content
+      a_element = bar_block.at('a')
+
+      address_span = a_element.next.next
+      address = address_span.content
+
+      city_state_zip_span = address_span.next.next
+      city_state_zip = city_state_zip_span.content
+      city = city_state_zip.split(',')[0]
+      state_zip =city_state_zip.split(',')[1]
+      state = state_zip.split(' ')[0]
+      zip = state_zip.split(' ')[1]
+
+      phone_span = city_state_zip_span.next.next
+      phone = phone_span.content.gsub(/[^0-9]/, "")
+
+
+      time_spans = bar_block.search('span.time')
+
+      time_spans.each do |time_span|
+
+        day_time = time_span.content
+        day = day_time.split('-')[0]
+        time = day_time.split(' ')[-2] + 'pm'
+
+        bar = Bar.new
+        bar.trivia_type = 'trivianation'
+        bar.trivia_day = day
+        bar.trivia_time = time
+        bar.name = name
+        bar.address = address
+        bar.city = city
+        bar.state = state
+        bar.zip = zip
+        bar.phone = phone
+
+        bar_array.push bar
+      end
+    end
+
+    #populate lat and lng
+    make_multiple_requests(bar_array) do |bar|
+      bar.populateLocation
+    end
+
+    return bar_array
   end
 
 
