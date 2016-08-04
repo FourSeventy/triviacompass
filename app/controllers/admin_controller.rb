@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   #GET /admin
   def index
     #pull all bars from DB for listing
-    @all_bars = Bar.all.order(:id)
+    @all_bars = Bar.all
 
     #get ratings for bars
     @ratings = Rating.get_all_ratings
@@ -63,8 +63,6 @@ class AdminController < ApplicationController
 
        redirect_to action: 'newBar'
     end
-
-
   end
 
   #GET admin/editBar/:id
@@ -118,8 +116,6 @@ class AdminController < ApplicationController
 
       redirect_to action: 'editBar', id: id
     end
-
-
   end
 
 
@@ -162,6 +158,8 @@ class AdminController < ApplicationController
     run_scraper 'trivianation'
   end
 
+
+  private
 
   #helper method that does all the logic for running a scraper
   def run_scraper(id)
