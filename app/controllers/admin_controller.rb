@@ -2,15 +2,13 @@ class AdminController < ApplicationController
 
   http_basic_authenticate_with :name => 'admin', :password => 'triviaCompassAdmin'
 
-  #GET admin
+  #GET /admin
   def index
-
     #pull all bars from DB for listing
-    @all_bars = Bar.all().order(:id)
+    @all_bars = Bar.all.order(:id)
 
     #get ratings for bars
     @ratings = Rating.get_all_ratings
-
   end
 
 
@@ -22,7 +20,6 @@ class AdminController < ApplicationController
 
   #POST admin/newBar
   def createBar
-
     #gather params
     name = params[:name].strip
     address = params[:address].strip
@@ -40,9 +37,7 @@ class AdminController < ApplicationController
       #populate location from google api
       bar.populateLocation
     rescue
-
-      logger.error "Error populating bar location for #{name} #{address}"
-
+      Rails.logger.error "Error populating bar location for #{name} #{address}"
     end
 
     #save to db
