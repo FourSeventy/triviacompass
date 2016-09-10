@@ -24,8 +24,8 @@ gem 'seed_dump'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 
-# Use Unicorn as the app server
- gem 'unicorn'
+# Use Puma as the app server
+ gem 'puma'
 
 
 group :development, :test do
