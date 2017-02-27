@@ -1,14 +1,11 @@
 class AdminController < ApplicationController
 
-  http_basic_authenticate_with :name => 'admin', :password => 'triviaCompassAdmin'
+  http_basic_authenticate_with :name => 'admin', :password => 'skywalker'
 
   #GET /admin
   def index
     #pull all bars from DB for listing
     @all_bars = Bar.all
-
-    #get ratings for bars
-    @ratings = Rating.get_all_ratings
   end
 
 
@@ -61,24 +58,21 @@ class AdminController < ApplicationController
       #write errors to flash
       flash[:errors] = bar.errors
 
-       redirect_to action: 'newBar'
+      redirect_to action: 'newBar'
     end
   end
 
   #GET admin/editBar/:id
   def editBar
-
     #get bar id from params
     bar_id = params[:id]
 
     #get bar from id
     @bar = Bar.find bar_id
-
   end
 
   #POST admin/editBar
   def updateBar
-
     #gather params
     id = params[:id]
     name = params[:name].strip
@@ -121,10 +115,9 @@ class AdminController < ApplicationController
 
   #POST admin/deletebar
   def deleteBar
-
     id = params[:id]
 
-    bar = Bar.find id
+    bar = Bar.find(id)
     bar.destroy
 
     redirect_to action: 'index'
@@ -163,7 +156,6 @@ class AdminController < ApplicationController
 
   #helper method that does all the logic for running a scraper
   def run_scraper(id)
-
     #build scraper service
     scraper_service = BarScraperService.new
 
@@ -182,7 +174,6 @@ class AdminController < ApplicationController
 
     #return json of bars
     render :json => {result: result}
-
   end
 
 end

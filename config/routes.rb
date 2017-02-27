@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
   #root
   root 'home#index'
 
@@ -20,13 +16,6 @@ Rails.application.routes.draw do
   post 'admin/scrapeSporcle' => 'admin#scrape_sporcle'
   post 'admin/scrapetrivianation' => 'admin#scrape_trivianation'
 
-
-  #rating api
-  get 'ratings' => 'rating#index'
-  get 'ratings/:id' => 'rating#show'
-  post 'ratings' => 'rating#create'
-
   #bar api
   get 'bars' => 'bars#index'
-
 end
