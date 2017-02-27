@@ -28,7 +28,6 @@
         <th>Number</th>
         <th>Trivia Time</th>
         <th>Trivia Day</th>
-        <th>Rating</th>
         <th>Lat</th>
         <th>Long</th>
         <th>Type</th>
@@ -66,9 +65,6 @@
               </td>
               <td>
                 <%= bar.trivia_day %>
-              </td>
-              <td>
-                <% concat @ratings[bar.id] if @ratings.has_key? bar.id%>
               </td>
               <td>
                 <%= bar.lat %>

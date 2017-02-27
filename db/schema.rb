@@ -31,13 +31,4 @@ ActiveRecord::Schema.define(version: 20151014022617) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
-
-  create_table "ratings", force: :cascade do |t|
-    t.integer  "bar_id"
-    t.integer  "rating"
-    t.string   "ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
 end

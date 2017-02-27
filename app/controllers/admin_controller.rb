@@ -1,14 +1,11 @@
 class AdminController < ApplicationController
 
-  http_basic_authenticate_with :name => 'admin', :password => 'triviaCompassAdmin'
+  http_basic_authenticate_with :name => 'admin', :password => 'skywalker'
 
   #GET /admin
   def index
     #pull all bars from DB for listing
     @all_bars = Bar.all
-
-    #get ratings for bars
-    @ratings = Rating.get_all_ratings
   end
 
 

@@ -1,28 +1,12 @@
-== README
+== TriviaCompass
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Find and play some trivia with triviacompass.com!
 
-Things you may want to cover:
+#set up database users
+sudo psql -U <username> -1 -c "CREATE USER trivia_user WITH PASSWORD 'password';"
+sudo psql -U <username> -1 -c "ALTER USER trivia_user WITH SUPERUSER;"
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+#create db
+rake db:create
+rake db:schema:load
+rake db:seed
