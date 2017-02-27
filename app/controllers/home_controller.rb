@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
 
   def index
-
     #set default location
     location = {name: 'Boston, MA', lat: 42.3583827, lng: -71.0626648 }
     #set search options
@@ -22,6 +21,5 @@ class HomeController < ApplicationController
 
     #write default data to page
     @default_data = {location: location, options: options, bars: bars_by_day}
-
   end
 end

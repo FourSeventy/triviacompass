@@ -1,11 +1,4 @@
-require 'mechanize'
-require 'http'
-
 class BarScraperService
-
-  def initialize
-
-  end
 
   ## Scrape the Geeks Who Drink bar listing page for bar data
   def scrape_geeks
