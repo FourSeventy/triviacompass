@@ -2,7 +2,6 @@ class BarScraperService
 
   ## Scrape the Geeks Who Drink bar listing page for bar data
   def scrape_geeks
-
     #make get request to geeks page
     mechanize = Mechanize.new
     page = mechanize.get('http://www.geekswhodrink.com/pages/venues?action=getAll')
@@ -53,7 +52,6 @@ class BarScraperService
       end
     end
 
-
     #populate bar lat and long, rate limited to 10 per second
     make_multiple_requests(bar_array) do |bar|
       bar.populateLocation
@@ -61,12 +59,10 @@ class BarScraperService
 
     #return array of bars
     return bar_array
-
   end
 
 
   def scrape_stump
-
     #make request to stump endpoint
     url = 'http://www.stumptrivia.com/shared/api/index.php'
     body = 'service=SiteService&operation=MultiEventFinder&data=%7B%22ReturnIndex%22%3A1%2C%22ReturnCount%22%3A10000%2C%22FocusWeekday%22%3A-1%2C%22EventTypes%22%3A%5B%22StumpLiveTrivia%22%2C%22StumpLiveQuestionnairey%22%2C%22StumpTriviaInABox%22%2C%22StumpQuestionnaireyInABox%22%5D%2C%22ReturnEventsRequired%22%3A1%2C%22SearchLatitude%22%3A37.09024%2C%22SearchLongitude%22%3A-95.71289100000001%2C%22SearchDistance%22%3A50000000%2C%22UseTwoPass%22%3Afalse%7D'
@@ -121,7 +117,6 @@ class BarScraperService
 
     #return bar list
     return bar_list
-
   end
 
   def scrape_brain
@@ -187,11 +182,10 @@ class BarScraperService
 
     #return bar array
     return bar_array
-
   end
 
+  #TODO: fixme
   def scrape_sporcle
-
     #get sporcle page
     mechanize = Mechanize.new
     page = mechanize.get('http://www.sporcle.com/live/locations/')
