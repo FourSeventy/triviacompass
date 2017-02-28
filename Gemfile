@@ -23,6 +23,8 @@ gem 'seed_dump'
 # Use Puma as the app server
 gem 'puma'
 
+#add better heroku logging
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'pry'
