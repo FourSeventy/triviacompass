@@ -52,7 +52,7 @@ class Bar < ActiveRecord::Base
         when 'Friday' then day_hash[:friday].push bar
         when 'Saturday' then day_hash[:saturday].push bar
         else 
-          raise "invalid trivia_day"
+          Rails.logger.error("bar id:#{bar.id} has an invalid trivia_day")
       end
     end
 
