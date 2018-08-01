@@ -123,57 +123,8 @@ class AdminController < ApplicationController
     redirect_to action: 'index'
   end
 
-  #GET admin/scrape
-  def scrape
-
-  end
-
-  #POST admin/scrapeGeeks
-  def scrape_geeks
-    run_scraper 'geeks'
-  end
-
-  #POST admin/scrapeStump
-  def scrape_stump
-    run_scraper 'stump'
-  end
-
-  #POST admin/scrapeBrain
-  def scrape_brain
-    run_scraper 'brain'
-  end
-
-  def scrape_sporcle
-    run_scraper 'sporcle'
-  end
-
-  def scrape_trivianation
-    run_scraper 'trivianation'
-  end
-
 
   private
 
-  #helper method that does all the logic for running a scraper
-  def run_scraper(id)
-    #build scraper service
-    scraper_service = BarScraperService.new
-
-    #scrape bars
-    result = scraper_service.send('scrape_' + id)
-
-    #todo: check for scrape errors
-    Bar.transaction do
-      Bar.where(trivia_type: id).delete_all
-
-      #save all bars to the db
-      result.each do |bar|
-        bar.save
-      end
-    end
-
-    #return json of bars
-    render :json => {result: result}
-  end
 
 end

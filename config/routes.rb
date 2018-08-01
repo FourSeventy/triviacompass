@@ -9,12 +9,6 @@ Rails.application.routes.draw do
   get 'admin/editBar/:id' => 'admin#editBar'
   post 'admin/editBar' => 'admin#updateBar'
   post 'admin/deleteBar' => 'admin#deleteBar'
-  get 'admin/scrape' => 'admin#scrape'
-  post 'admin/scrapeGeeks' => 'admin#scrape_geeks'
-  post 'admin/scrapeStump' => 'admin#scrape_stump'
-  post 'admin/scrapeBrain' => 'admin#scrape_brain'
-  post 'admin/scrapeSporcle' => 'admin#scrape_sporcle'
-  post 'admin/scrapetrivianation' => 'admin#scrape_trivianation'
 
   #bar api
   get 'bars' => 'bars#index'

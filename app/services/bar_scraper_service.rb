@@ -1,66 +1,79 @@
 class BarScraperService
 
+  #helper method that does all the logic for running a scraper
+  #geeks, stump, brain, sporcle
+  def self.run(id)
+    #build scraper service
+    scraper_service = BarScraperService.new
+
+    #scrape bars
+    result = scraper_service.send('scrape_' + id)
+
+    #todo: check for scrape errors
+    Bar.transaction do
+      Bar.where(trivia_type: id).delete_all
+
+      #save all bars to the db
+      result.each do |bar|
+        bar.save
+      end
+    end
+
+    #return json of bars
+    Rails.logger.info result
+  end
+
   ## Scrape the Geeks Who Drink bar listing page for bar data
   def scrape_geeks
-    #make get request to geeks page
-    mechanize = Mechanize.new
-    page = mechanize.get('http://www.geekswhodrink.com/pages/venues?action=getAll')
+
+    url = 'https://dori-us-east-1.searchly.com/website/venue/_search?from=0&size=3000'
+    raw_response = HTTP.headers({"Content-Type" => "application/x-www-form-urlencoded",
+                                 "Authorization" =>"Basic d2Vic2l0ZTpxaGJnbDVsczJ1Zm12cjI1aHFwNGhtdGVyaWZhbnplNw=="})
+      .get(url)
+
+    #parse response to a hash
+    response = JSON.parse raw_response.to_s
+
+    #handle bad response
+    if raw_response.code != 200
+      Rails.logger.error('Error scraping geeks bars')
+      Rails.logger.error(raw_response.reason)
+    end
 
     #initialize array to hold our list of bars
     bar_array = []
 
-    #get all bar anchors
-    bar_a = page.search('#content a')
+    #iterate over all results
+    response["hits"]["hits"].each do |row|
+      bar_details = row["_source"]
 
-    #iterate over all bar anchors
-    bar_a.each do |result|
-
-      bar = Bar.new
-      bar.name = result.text
-
-      #figure out address
-      address_parts = result['title'].split('|')
-      bar.address = address_parts[0]
-      city_state_zip = address_parts[1].split(' ')
-      bar.city = city_state_zip[0..-3].join(' ')
-      bar.state = city_state_zip[-2]
-      bar.zip = city_state_zip[-1]
-
-      #fix zip edge case where leading 0 gets cut off
-      if bar.zip.length < 5
-        bar.zip.prepend '0'
+      #skip bars if the data is bad
+      if bar_details["status"] != "Active" || bar_details["location"].nil?
+        next
       end
 
-      #find previous h1 for the day
-      bar.trivia_day = result.at_xpath('(preceding-sibling::h1 | preceding-sibling::*//h1)[last()]').text
+      #make a new bar for each quiz day
+      bar_details["quizDays"].each do |day|
+        bar = Bar.new
+        bar.name = bar_details["venueName"].gsub /&amp;/, "&"
+        bar.address = bar_details["address"]
+        bar.city = bar_details["city"]
+        bar.state = bar_details["state"]
+        bar.zip = bar_details["zip"]
+        bar.phone = bar_details["phone"]
+        bar.trivia_day = day
+        bar.lat = bar_details["location"][1]
+        bar.long = bar_details["location"][0]
+        bar.trivia_type = 'geeks'
+        bar.trivia_time = (DateTime.parse(bar_details["quizStartDateTimeUTC"]) - 6.hours).strftime("%l:%M %P")
 
-      #find time
-      span =  result.at_xpath('following-sibling::span')
-      trivia_time_node = span.at_xpath('following-sibling::text()')
-      bar.trivia_time = trivia_time_node.text
-
-      #set trivia type
-      bar.trivia_type = 'geeks'
-
-      #check if bar is an upcoming bar
-      b = trivia_time_node.next
-      upcoming = !b.nil? && b.name == 'b' && b.text.include?('Starts')
-
-      #add bar to array as long as its not upcoming
-      unless upcoming
-        bar_array.push bar
+        bar_array << bar
       end
-    end
-
-    #populate bar lat and long, rate limited to 10 per second
-    make_multiple_requests(bar_array) do |bar|
-      bar.populateLocation
     end
 
     #return array of bars
     return bar_array
   end
-
 
   def scrape_stump
     #make request to stump endpoint
