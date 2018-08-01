@@ -10,7 +10,7 @@ class HomeController < ApplicationController
     cookie_location = cookies[:location]
     unless cookie_location.nil?
       location = JSON.parse(cookie_location, {:symbolize_names => true})
-      @cookied = true;
+      @cookied = true
     end
 
     #get bars by location

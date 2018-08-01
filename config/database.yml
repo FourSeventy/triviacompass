@@ -5,18 +5,13 @@ default: &default
 
 development:
   <<: *default
-  database: TriviaCompass_development
+  database: trivia_development
   host: localhost
-  username: trivia_user
-  password: password
 
 test:
   <<: *default
-  database: TriviaCompass_test
+  database: trivia_test
   host: localhost
-  username: trivia_user
-  password: password
-
 
 production:
   <<: *default
