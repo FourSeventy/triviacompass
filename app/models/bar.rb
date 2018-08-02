@@ -76,7 +76,7 @@ class Bar < ActiveRecord::Base
     response = JSON.parse raw_response.to_s
 
     #raise exception if response isn't ok
-    raise 'No Results from geocode api'if response['status'] != 'OK'
+    return if response['status'] != 'OK'
 
     #set lat and long from response
     location = response['results'][0]['geometry']['location']
