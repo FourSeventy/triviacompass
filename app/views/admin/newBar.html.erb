@@ -51,15 +51,20 @@
       </div>
 
       <div class="row">
-        <div class="col-md-6 form-group">
+        <div class="col-md-4 form-group">
             <%= label_tag :time, 'Trivia Time' %>
             <%= text_field_tag :time, flash[:trivia_time], class: 'form-control'  %>
         </div>
 
-        <div class="col-md-6 form-group">
+        <div class="col-md-4 form-group">
             <%= label_tag :day, 'Trivia Day' %>
           <%= select_tag :day, options_for_select([['Sunday','Sunday'],['Monday','Monday'],['Tuesday','Tuesday'],['Wednesday','Wednesday'],['Thursday','Thursday'],['Friday','Friday'],['Saturday','Saturday']], flash[:trivia_day]), class: 'form-control' %>
 
+        </div>
+
+        <div class="col-md-4 form-group">
+          <%= label_tag :trivia_type, 'Trivia Type' %>
+          <%= text_field_tag :trivia_type, flash[:trivia_type] , class: 'form-control' %>
         </div>
       </div>
 

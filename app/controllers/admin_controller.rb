@@ -26,9 +26,10 @@ class AdminController < ApplicationController
     phone = params[:phone].tr('()-', '') #remove ( ) and -
     trivia_time = params[:time].strip
     trivia_day = params[:day]
+    trivia_type = params[:trivia_type]
 
     #create model
-    bar = Bar.new(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
+    bar = Bar.new(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day, trivia_type: trivia_type)
 
     begin
       #populate location from google api
@@ -54,6 +55,7 @@ class AdminController < ApplicationController
       flash[:phone] = phone
       flash[:trivia_time] = trivia_time
       flash[:trivia_day] = trivia_day
+      flash[:trivia_type] = trivia_type
 
       #write errors to flash
       flash[:errors] = bar.errors
@@ -83,10 +85,11 @@ class AdminController < ApplicationController
     phone = params[:phone].tr('()-', '') #remove ( ) and -
     trivia_time = params[:time].strip
     trivia_day = params[:day]
+    trivia_type = params[:trivia_type]
 
     #find record and update
     bar = Bar.find id
-    bar.assign_attributes(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day)
+    bar.assign_attributes(name: name, address: address, city: city, state: state, zip: zip, phone: phone, trivia_time: trivia_time, trivia_day: trivia_day, trivia_type: trivia_type)
 
     begin
       #populate location from google api
