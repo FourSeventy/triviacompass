@@ -15,7 +15,7 @@ class Scraper
 
       #save all bars to the db
       result.each do |bar|
-        bar.save!
+        bar.save
       end
     end
 
@@ -26,6 +26,37 @@ class Scraper
   # http://www.teamtrivia.com/
   def scrape_team
 
+    #make get request to page
+    mechanize = Mechanize.new
+    page = mechanize.get('http://www.teamtrivia.com/search.asp?izipcode=&imiles=50&iday=blank&locationname=&locationregion=')
+
+    #initialize array to hold our list of bars
+    bar_array = []
+
+    rows = page.search(".searchresults  tr:not(:first-child)")
+    rows.each do |row|
+      bar = Bar.new
+      bar.trivia_type = 'team'
+      bar.address = row.search("td:nth-child(1)").to_s.strip.split("<br>")[1]
+      bar.name = row.search("td:nth-child(1) a").text.strip.gsub(/&amp;/, "&")
+      if bar.name == "FOR CURRENT LISTINGS GO TO www.teamtriviami.com" 
+        bar.name = bar.address
+      end
+      bar.city = row.search("td:nth-child(1)").to_s.strip.split("<br>")[2].split(",")[0]
+      bar.state = row.search("td:nth-child(1)").to_s.strip.split("<br>")[2].split(",")[1].strip.gsub(/[[:space:]]/, " ").gsub("</td>", "").split(" ")[0]
+      bar.zip = row.search("td:nth-child(1)").to_s.strip.split("<br>")[2].split(",")[1].strip.gsub(/[[:space:]]/, " ").gsub("</td>", "").split(" ")[1]
+      bar.trivia_time = row.search("td:nth-child(2)").to_s.strip.split("<br>")[1]
+      bar.trivia_day = row.search("td:nth-child(2)").to_s.strip.split("<br>")[0].split(">").last
+      bar.phone = row.search("td:nth-child(3)").text.strip
+      bar_array << bar
+    end
+
+    make_multiple_requests(bar_array) do |bar|
+      print "."
+      bar.populateLocation
+    end
+
+    return bar_array
   end
 
   # https://www.lastcalltrivia.com/schedule/
