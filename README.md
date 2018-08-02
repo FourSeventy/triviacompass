@@ -5,8 +5,8 @@ Find and play some trivia with triviacompass.com!
 
 # Update Bar Listings
 ```
-BarScraperService.run(name)
+Scraper.run(name)
 
-names: geeks, stump, brain, sporcle
+names:  lastcall, team, geeks, stump, brain, sporcle, trivianation
 
 ```

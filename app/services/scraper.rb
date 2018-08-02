@@ -1,10 +1,10 @@
-class BarScraperService
+class Scraper
 
   #helper method that does all the logic for running a scraper
-  #geeks, stump, brain, sporcle
+  #team, geeks, stump, brain, sporcle, trivianation
   def self.run(id)
     #build scraper service
-    scraper_service = BarScraperService.new
+    scraper_service = Scraper.new
 
     #scrape bars
     result = scraper_service.send('scrape_' + id)
@@ -15,7 +15,7 @@ class BarScraperService
 
       #save all bars to the db
       result.each do |bar|
-        bar.save
+        bar.save!
       end
     end
 
@@ -23,7 +23,63 @@ class BarScraperService
     Rails.logger.info result
   end
 
-  ## Scrape the Geeks Who Drink bar listing page for bar data
+  # http://www.teamtrivia.com/
+  def scrape_team
+
+  end
+
+  # https://www.lastcalltrivia.com/schedule/
+  def scrape_lastcall
+
+    #make get request to page
+    mechanize = Mechanize.new
+    page = mechanize.get('https://www.lastcalltrivia.com/schedule/')
+
+    #initialize array to hold our list of bars
+    bar_array = []
+
+
+    divs = page.search(".scheduleBox>div")
+    divs.each do |div|
+      bar = Bar.new
+      bar.trivia_type = 'lastcall'
+      bar.name = div.search(".showVenue").text.strip.gsub(/&amp;/, "&").humanize
+      time_block = div.search(".timeDate b").text.split("|").first
+      day = time_block.split(" ").first
+      time = time_block.split(" ")[1..2].join(" ")
+
+      day_map = {
+        'SUN' => 'Sunday',
+        'MON' => 'Monday',
+        'TUE' => 'Tuesday',
+        'WED' => 'Wednesday',
+        'THU' => 'Thursday',
+        'FRI' => 'Friday',
+        'SAT' => 'Saturday',
+      }
+
+      bar.trivia_day = day_map[day]
+      bar.trivia_time = time
+
+      address_block = div.search(".showAddress").text.strip
+      bar.address = address_block.strip.split(",").first.strip
+      bar.city =  address_block.strip.split(",")[1].strip
+      bar.state = address_block.strip.split(",").last.split("(").first.strip
+      bar.phone = "(" + address_block.strip.split(",").last.split("(")[1]
+
+      bar_array << bar
+    end
+
+
+    #populate lat and lng
+    make_multiple_requests(bar_array) do |bar|
+      bar.populateLocation
+    end
+
+    return bar_array
+  end
+
+  # https://www.geekswhodrink.com/schedule/MA
   def scrape_geeks
 
     url = 'https://dori-us-east-1.searchly.com/website/venue/_search?from=0&size=3000'
@@ -75,6 +131,7 @@ class BarScraperService
     return bar_array
   end
 
+  # https://www.stumptrivia.com/
   def scrape_stump
     #make request to stump endpoint
     url = 'http://www.stumptrivia.com/shared/api/index.php'
@@ -134,7 +191,7 @@ class BarScraperService
 
   def scrape_brain
 
-    #make get request to geeks page
+    #make get request to brain page
     mechanize = Mechanize.new
     page = mechanize.get('http://www.brainstormer.com/venuelist.aspx')
 
