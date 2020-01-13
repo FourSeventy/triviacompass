@@ -55,7 +55,9 @@
 
   <!-- Start ThoughtMetric Snippet -->
   <script>
-    "use strict";!function(e,t,i,n,p,s,c,a,l){e.tmpixel||((c=e.tmpixel=function(){c.process?c.process.apply(c,arguments):c.queue.push(arguments)}).queue=[],c.t=1*new Date,(a=t.createElement("script")).async=1,a.src="https://pixel.thoughtmetric.io/tmpixel.min.js?t="+864e5*Math.ceil(new Date/864e5),(l=t.getElementsByTagName("script")[0]).parentNode.insertBefore(a,l))}(window,document),tmpixel("init","ID-00000003"),tmpixel("event","pageload");
+    !function(e,t,i){e.thoughtmetricQueue=[],e.thoughtmetric=function(){e.thoughtmetricQueue.push(arguments)};var c=t.createElement("script");c.async=1,c.src="https://pixel.thoughtmetric.io/tmpixel.min.js?t="+864e5*Math.ceil(new Date/864e5);var n=t.getElementsByTagName("script")[0];n.parentNode.insertBefore(c,n)}(window,document);
+    thoughtmetric("init","ID-00000003");
+    thoughtmetric("pageview");
   </script>
   <!-- End ThoughtMetric Snippet -->
 
